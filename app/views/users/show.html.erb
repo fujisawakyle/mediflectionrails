@@ -1,0 +1,5 @@
+<% if false %> <%= @user.name %>, <%= @user.email %>
+<% end%>
+
+<h1>Welcome to Mediflection</h1>
+<%= react_component("User", props: @login_props, prerender: false) %>
