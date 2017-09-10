@@ -10,6 +10,7 @@ gem 'rails', '~> 5.1.4'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem 'bcrypt',       '3.1.11'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -57,5 +58,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # ADDED GEMS
 gem 'react_on_rails', '9.0.0'
+gem 'bootstrap-sass', '3.3.7'
 
 gem 'mini_racer', platforms: :ruby

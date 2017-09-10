@@ -27,18 +27,6 @@ export default class User extends React.Component {
         <h3>
           Happy meditating, {this.state.name}
         </h3>
-        <hr />
-        <form >
-          <label htmlFor="name">
-            Welcome:
-          </label>
-          <input
-            id="name"
-            type="text"
-            value={this.state.name}
-            onChange={(e) => this.updateName(e.target.value)}
-          />
-        </form>
       </div>
     );
   }
