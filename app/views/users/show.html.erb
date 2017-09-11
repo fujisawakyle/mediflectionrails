@@ -1,5 +1,3 @@
-<% if false %> <%= @user.name %>, <%= @user.email %>
-<% end%>
+<% provide(:title, "Go within") %>
+<%= react_component("User", props: @login_props, prerender: true) %>
 
-<h1>Welcome to Mediflection</h1>
-<%= react_component("User", props: @login_props, prerender: false) %>
