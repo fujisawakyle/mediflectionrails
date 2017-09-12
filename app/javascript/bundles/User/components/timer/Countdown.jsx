@@ -102,16 +102,17 @@ class Countdown extends Component {
 
   render() {
     let timerDisplay;
-    // if (this.props.today) {
+    if (this.props.today) {
+      console.log('countdown today')
       if (this.state.startToggle) {
         timerDisplay = <button onClick={this.startTimer}>Start</button>
       }
       else {
         timerDisplay = <button onClick={this.resetTimer}>Reset</button>
       }
-    // } else {
-    //   timerDisplay = <div> {this.props.duration} </div>
-    // }
+    } else {
+      timerDisplay = <div> {this.props.duration} </div>
+    }
     return(
       <div>
         {timerDisplay}

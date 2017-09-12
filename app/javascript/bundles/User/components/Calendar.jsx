@@ -1,11 +1,9 @@
-// import React, { Component } from 'react';
+import React, { Component } from 'react';
 import DayPicker from 'react-day-picker';
-// import Timer from './Timer';
-// import Journal from './Journal';
+import Timer from './timer/Timer';
+import Journal from './journal/Journal';
 // import WeekDisplay from './WeekDisplay';
-
 // import PropTypes from 'prop-types';
-import React from 'react';
 
 const style = {
     calendar : {
@@ -31,8 +29,63 @@ const year = dateObj.getFullYear();
 const month = dateObj.getMonth();
 const date = dateObj.getDate();
 const todayDate = `${year},${month},${date}`;
+let oneWeekAgo, dateAlter, formattedDate;
 
-export default class Calendar extends React.Component {
+const weekArray = [];
+// for (let i = 0; i < 7; i ++){
+//   let oneWeekAgo = new Date()
+//   oneWeekAgo.setDate(oneWeekAgo.getDate() - 6 + i);
+//   let dateAlter = String(oneWeekAgo).split(' ').splice(1,3);
+//   if (dateAlter[1][0] == 0) {
+//     dateAlter[1] = dateAlter[1].substr(1);
+//   }
+//   dateAlter[0] = translateMonth(dateAlter[0]);
+//   const formattedDate = `${dateAlter[2]},${dateAlter[0]},${dateAlter[1]}`;
+//   weekArray[i] = formattedDate
+// }
+
+function translateMonth (month) {
+  switch (month) {
+      case 'Jan':
+        month = '0';
+        break;
+      case 'Feb':
+        month = '1';
+        break;
+      case 'Mar':
+        month = '2';
+        break;
+      case 'Apr':
+        month = '3';
+        break;
+      case 'May':
+        month = '4';
+        break;
+      case 'Jun':
+        month = '5';
+        break;
+      case 'Jul':
+        month = '6';
+        break;
+      case 'Aug':
+        month = '7';
+        break;
+      case 'Sep':
+        month = '8';
+        break;
+      case 'Oct':
+        month = '9';
+        break;
+      case 'Nov':
+        month = '10';
+        break;
+      case 'Dec':
+        month = '11';
+        break;
+    }
+  return month;
+}
+export default class Calendar extends Component {
   // static propTypes = {
   //   name: PropTypes.string.isRequired, // this is passed from the Rails view
   // };
@@ -43,6 +96,7 @@ export default class Calendar extends React.Component {
 
     this.state = {
       daysArray: this.props.daysArray,
+      dateSelected: true,
     }
 
     // for (let i = 0; i < weekArray.length ; i++) {
@@ -54,55 +108,58 @@ export default class Calendar extends React.Component {
     // }
 
   }
-  // chooseDay = (day) => {
-  //   //need to call reset if the day is changed.
-  //   this.setState ({
-  //     dateSelected: true
+  chooseDay = (day) => {
+    //need to call reset if the day is changed.
+    this.setState ({
+      dateSelected: true
 
-  //   })
-  //   let selectedDay = String(day).split(" ").slice(0, 4);
-  //   selectedDay[1] = translateMonth(selectedDay[1]);
-  //   selectedDay = `${selectedDay[3]},${selectedDay[1]},${selectedDay[2]}`
-  //   //make API call for this selectedDay, alert in the meantime
-  //   //alert(selectedDay);
+    })
+    let selectedDay = String(day).split(" ").slice(0, 4);
+    selectedDay[1] = translateMonth(selectedDay[1]);
+    selectedDay = `${selectedDay[3]},${selectedDay[1]},${selectedDay[2]}`
+    //make API call for this selectedDay, alert in the meantime
+    //alert(selectedDay);
 
-  //   if (selectedDay === todayDate) {
-  //     console.log('today!')
-  //     this.setState ({
-  //       today: true,
-  //     })
-  //   }
-  //   else {
-  //     //hide the timer if another date is pressed.
+    if (selectedDay === todayDate) {
+      console.log('today')
+      this.setState ({
+        today: true,
+      })
+    }
+    else {
+      //hide the timer if another date is pressed.
+      console.log('not today')
+      this.setState ({
+        today: false,
+        duration: 'no data',
+        entry: 'no entry'
+      })
+    console.log(selectedDay);
+    console.log('new Date:');
+    console.log(new Date(selectedDay));
+    console.log(this.state.daysArray);
+    if (this.state.daysArray.indexOf(selectedDay)) {
+      console.log('right on!')
+    }
 
-
-  //     if(this.props.userData[selectedDay]) {
-  //       this.setState ({
-  //         today: false,
-  //         duration: this.props.userData[selectedDay].meditationDuration,
-  //         entry: this.props.userData[selectedDay].journal
-  //       })
-  //     } else {
-  //       this.setState ({
-  //         today: false,
-  //         duration: 'no data',
-  //         entry: 'no entry'
-  //       })
-  //     }
-  //   }
-  // }
+      // if(this.props.userData[selectedDay]) {
+      //   this.setState ({
+      //     today: false,
+      //     duration: 'no data',
+      //     entry: 'no entry'
+      //     //duration: this.props.userData[selectedDay].meditationDuration,
+      //     //entry: this.props.userData[selectedDay].journal
+      //   })
+      // } else {
+      //   this.setState ({
+      //     today: false,
+      //     duration: 'no data',
+      //     entry: 'no entry'
+      //   })
+      // }
+    }
+  }
   render () {
-
-    // const data = this.props.userData;
-    // console.log(data);
-    // const formattedData = [];
-    // const daysArray = [];
-    // for(let i of data) {
-
-    // }
-    // for(let i = 0; i < formattedData.length; i++) {
-    //   daysArray[i] = new Date(formattedData[i][0],formattedData[i][1],formattedData[i][2]);
-    // }
     let meditationUI;
     // if (this.state.dateSelected) {
     //   meditationUI = ( <div style={style.container}>
@@ -127,7 +184,10 @@ export default class Calendar extends React.Component {
             initialMonth={new Date(year, month)}
             todayButton="Go to Today"
             selectedDays={this.state.daysArray}
+            onDayClick={day => this.chooseDay(day)}
           />
+          <Timer today={this.state.today} duration={this.state.duration}/>
+          <Journal />
         </div>
         {meditationUI}
       </div>
