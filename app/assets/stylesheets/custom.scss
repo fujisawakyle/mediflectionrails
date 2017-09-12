@@ -159,6 +159,16 @@ input {
   }
 }
 
+/* flexbox container */
+.flexbox-container {
+  display:flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.width-contraint {
+  width: 400px;
+}
 /* miscellaneous */
 
 .debug_dump {

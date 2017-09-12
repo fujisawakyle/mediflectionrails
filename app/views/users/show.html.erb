@@ -1,6 +1,9 @@
 <% provide(:title, "Go within") %>
-<%= react_component("User", props: @login_props, prerender: true) %>
 
-<%= react_component("Timer", props: @login_props, prerender: true) %>
+<%= react_component("User", props: @login_props) %>
 
-<%= react_component("Journal", props: @login_props, prerender: true) %>
+<%= react_component("Calendar") %>
+
+<%= react_component("Timer") %>
+
+<%= react_component("Journal") %>

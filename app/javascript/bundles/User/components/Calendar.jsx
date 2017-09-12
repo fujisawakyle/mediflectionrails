@@ -4,10 +4,8 @@ import DayPicker from 'react-day-picker';
 // import Journal from './Journal';
 // import WeekDisplay from './WeekDisplay';
 
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import React from 'react';
-
-import 'react-day-picker/lib/style.css';
 
 const style = {
     calendar : {
@@ -92,9 +90,9 @@ function translateMonth (month) {
 
 
 export default class Calendar extends React.Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired, // this is passed from the Rails view
-  };
+  // static propTypes = {
+  //   name: PropTypes.string.isRequired, // this is passed from the Rails view
+  // };
     constructor(props) {
     super(props);
 
@@ -188,6 +186,7 @@ export default class Calendar extends React.Component {
           <DayPicker
             initialMonth={new Date(year, month)}
             todayButton="Go to Today"
+
           />
         </div>
         {meditationUI}
