@@ -4,7 +4,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @mediflections = @user.mediflections.find(1)
     @login_props = { name: @user.name }
+    @mediflection_props = { mediflection: @mediflections.time }
   end
 
   def new
