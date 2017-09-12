@@ -166,7 +166,7 @@ export default class Calendar extends Component {
     else {
       this.setState ({
         duration: 'no data',
-        entry: 'no entry'
+        entry: '',
       })
     }
   }
@@ -198,7 +198,7 @@ export default class Calendar extends Component {
             onDayClick={day => this.chooseDay(day)}
           />
           <Timer today={this.state.today} duration={this.state.duration}/>
-          <Journal />
+          <Journal entry={this.state.entry} />
         </div>
         {meditationUI}
       </div>
