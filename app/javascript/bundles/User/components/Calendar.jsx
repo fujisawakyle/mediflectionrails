@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DayPicker from 'react-day-picker';
 import Timer from './timer/Timer';
 import Journal from './journal/Journal';
-// import WeekDisplay from './WeekDisplay';
+import WeekDisplay from './weekdisplay/WeekDisplay';
 // import PropTypes from 'prop-types';
 
 const style = {
@@ -199,6 +199,7 @@ export default class Calendar extends Component {
           />
           <Timer today={this.state.today} duration={this.state.duration}/>
           <Journal entry={this.state.entry} />
+          <WeekDisplay />
         </div>
         {meditationUI}
       </div>

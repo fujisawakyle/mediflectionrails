@@ -6,7 +6,7 @@ const style = {
     }
 }
 
-class ShowRemaining extends Component {
+export default class ShowRemaining extends Component {
     constructor(props) {
         super(props);
 
@@ -21,4 +21,3 @@ class ShowRemaining extends Component {
     }
 }
 
-export default ShowRemaining;
