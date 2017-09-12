@@ -4,8 +4,8 @@ import Entry from './Entry';
 const style = {
     journalBox : {
         backgroundColor: '#adf',
-        height: '400px',
-        width: '200px',
+        height: '350px',
+        width: '250px',
         textAlign: 'center',
         margin: 'auto',
         border: '1px solid black',

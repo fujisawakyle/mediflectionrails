@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Countdown from './Countdown';
 
 const style = {
+
     clockDisplay : {
         width: '40px',
         height: '30px',
@@ -46,8 +47,10 @@ class Clock extends Component {
     render () {
         let timeInput;
         // if (this.state.showInput && this.props.today) {
-            timeInput = (<div className='clockBox'>
+            timeInput = (
+                <div className='clockBox'>
                     <input
+                        style={style.clockDisplay}
                         className='clockDisplay'
                         type='number'
                         value={this.state.value}
