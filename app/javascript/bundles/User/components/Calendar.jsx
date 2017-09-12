@@ -95,11 +95,16 @@ export default class Calendar extends Component {
     constructor(props) {
     super(props);
 
+
     this.state = {
       daysArrayNum: this.props.daysArrayNum,
       daysArrayText: this.props.daysArrayText,
       dateSelected: true,
+      userData: this.props.userData,
+      today: true,
     }
+    console.log('userData:');
+    console.log(this.state.userData);
 
     // for (let i = 0; i < weekArray.length ; i++) {
     //   if(!this.props.userData[weekArray[i]]) {
@@ -110,6 +115,7 @@ export default class Calendar extends Component {
     // }
 
   }
+
   chooseDay = (day) => {
 
     //need to call reset if the day is changed.
@@ -132,35 +138,36 @@ export default class Calendar extends Component {
     }
     else {
       //hide the timer if another date is pressed.
-      // console.log('not today')
+      console.log('not today')
       this.setState ({
         today: false,
+      })
+    }
+    // else {
+    //   //hide the timer if another date is pressed.
+    //   // console.log('not today')
+    //   this.setState ({
+    //     today: false,
+    //     duration: 'no data',
+    //     entry: 'no entry'
+    //   })
+    // }
+    if (this.state.daysArrayNum.indexOf(selectedDay) >= 0) {
+      console.log('logged day selected');
+      for(let data of this.state.userData) {
+        if(selectedDay == data.date) {
+          this.setState ({
+            duration: data.time,
+            entry: data.journal,
+          })
+        }
+      }
+    }
+    else {
+      this.setState ({
         duration: 'no data',
         entry: 'no entry'
       })
-    // console.log(selectedDay);
-    // console.log('new Date:');
-    // console.log(new Date(selectedDay));
-    // console.log(this.state.daysArray);
-    if (this.state.daysArrayNum.indexOf(selectedDay) >= 0) {
-       console.log('right on!')
-    }
-
-      // if(this.props.userData[selectedDay]) {
-      //   this.setState ({
-      //     today: false,
-      //     duration: 'no data',
-      //     entry: 'no entry'
-      //     //duration: this.props.userData[selectedDay].meditationDuration,
-      //     //entry: this.props.userData[selectedDay].journal
-      //   })
-      // } else {
-      //   this.setState ({
-      //     today: false,
-      //     duration: 'no data',
-      //     entry: 'no entry'
-      //   })
-      // }
     }
   }
   render () {

@@ -33,7 +33,7 @@ export default class User extends React.Component {
     this.state = {
       name: this.props.name,
       mediflection: arr,
-      userData: this.props.mediflection,
+      userData: data,
       daysArrayNum: daysArrayNum,
       daysArrayText: daysArrayText,
     };
@@ -53,7 +53,7 @@ export default class User extends React.Component {
         <h3>
           Time: {this.state.mediflection}
         </h3>
-          <Calendar daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.mediflection}/>
+          <Calendar daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.userData}/>
 
       </div>
     );
