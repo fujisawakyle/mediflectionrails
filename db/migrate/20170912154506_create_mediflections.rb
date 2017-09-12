@@ -4,6 +4,7 @@ class CreateMediflections < ActiveRecord::Migration[5.1]
       t.references :user, foreign_key: true
       t.text :journal
       t.integer :time
+      t.string :date
 
       t.timestamps
     end

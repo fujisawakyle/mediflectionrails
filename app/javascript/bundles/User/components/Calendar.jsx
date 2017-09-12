@@ -31,63 +31,6 @@ const year = dateObj.getFullYear();
 const month = dateObj.getMonth();
 const date = dateObj.getDate();
 const todayDate = `${year},${month},${date}`;
-let oneWeekAgo, dateAlter, formattedDate;
-
-const weekArray = [];
-for (let i = 0; i < 7; i ++){
-  let oneWeekAgo = new Date()
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 6 + i);
-  let dateAlter = String(oneWeekAgo).split(' ').splice(1,3);
-  if (dateAlter[1][0] == 0) {
-    dateAlter[1] = dateAlter[1].substr(1);
-  }
-  dateAlter[0] = translateMonth(dateAlter[0]);
-  const formattedDate = `${dateAlter[2]},${dateAlter[0]},${dateAlter[1]}`;
-  weekArray[i] = formattedDate
-}
-
-function translateMonth (month) {
-  switch (month) {
-      case 'Jan':
-        month = '0';
-        break;
-      case 'Feb':
-        month = '1';
-        break;
-      case 'Mar':
-        month = '2';
-        break;
-      case 'Apr':
-        month = '3';
-        break;
-      case 'May':
-        month = '4';
-        break;
-      case 'Jun':
-        month = '5';
-        break;
-      case 'Jul':
-        month = '6';
-        break;
-      case 'Aug':
-        month = '7';
-        break;
-      case 'Sep':
-        month = '8';
-        break;
-      case 'Oct':
-        month = '9';
-        break;
-      case 'Nov':
-        month = '10';
-        break;
-      case 'Dec':
-        month = '11';
-        break;
-    }
-  return month;
-}
-
 
 export default class Calendar extends React.Component {
   // static propTypes = {
@@ -95,13 +38,11 @@ export default class Calendar extends React.Component {
   // };
     constructor(props) {
     super(props);
+    console.log('yeah')
+    console.log(this.props.daysArray)
 
     this.state = {
-      dateSelected: true,
-      today: true,
-      duration: null,
-      entry: '',
-      weekDates: weekArray
+      daysArray: this.props.daysArray,
     }
 
     // for (let i = 0; i < weekArray.length ; i++) {
@@ -153,12 +94,11 @@ export default class Calendar extends React.Component {
   render () {
 
     // const data = this.props.userData;
+    // console.log(data);
     // const formattedData = [];
     // const daysArray = [];
-    // for( let key in this.props.userData) {
-    //   if (data.hasOwnProperty(key)) {
-    //     formattedData.push(key.split(','));
-    //   }
+    // for(let i of data) {
+
     // }
     // for(let i = 0; i < formattedData.length; i++) {
     //   daysArray[i] = new Date(formattedData[i][0],formattedData[i][1],formattedData[i][2]);
@@ -186,7 +126,7 @@ export default class Calendar extends React.Component {
           <DayPicker
             initialMonth={new Date(year, month)}
             todayButton="Go to Today"
-
+            selectedDays={this.state.daysArray}
           />
         </div>
         {meditationUI}

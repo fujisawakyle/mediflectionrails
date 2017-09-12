@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20170912154506) do
     t.integer "user_id"
     t.text "journal"
     t.integer "time"
+    t.string "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_mediflections_on_user_id"
