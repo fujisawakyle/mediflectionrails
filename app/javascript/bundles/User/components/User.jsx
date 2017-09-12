@@ -4,7 +4,8 @@ import Calendar from './Calendar';
 import Timer from './timer/Timer';
 import Journal from './journal/Journal';
 
-const daysArray = [];
+const daysArrayNum = [];
+const daysArrayText = [];
 
 export default class User extends React.Component {
   // static propTypes = {
@@ -20,9 +21,9 @@ export default class User extends React.Component {
     super(props);
 
     const data = this.props.mediflection;
-    console.log(data[0].date);
     for(let i of data) {
-      daysArray.push(i.date);
+      daysArrayNum.push(i.date);
+      daysArrayText.push(new Date(i.date));
     }
 
     // let arr = this.props.mediflection[0].journal
@@ -33,7 +34,8 @@ export default class User extends React.Component {
       name: this.props.name,
       mediflection: arr,
       userData: this.props.mediflection,
-      daysArray: daysArray,
+      daysArrayNum: daysArrayNum,
+      daysArrayText: daysArrayText,
     };
   }
 
@@ -51,7 +53,7 @@ export default class User extends React.Component {
         <h3>
           Time: {this.state.mediflection}
         </h3>
-          <Calendar daysArray={this.state.daysArray} userData={this.state.mediflection}/>
+          <Calendar daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.mediflection}/>
 
       </div>
     );

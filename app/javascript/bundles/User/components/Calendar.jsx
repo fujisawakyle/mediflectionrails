@@ -26,10 +26,13 @@ const style = {
 
 const dateObj = new Date();
 const year = dateObj.getFullYear();
-const month = dateObj.getMonth();
+const month = dateObj.getMonth() + 1;
 const date = dateObj.getDate();
 const todayDate = `${year},${month},${date}`;
 let oneWeekAgo, dateAlter, formattedDate;
+
+    console.log('today date:')
+    console.log(todayDate);
 
 const weekArray = [];
 // for (let i = 0; i < 7; i ++){
@@ -47,40 +50,40 @@ const weekArray = [];
 function translateMonth (month) {
   switch (month) {
       case 'Jan':
-        month = '0';
-        break;
-      case 'Feb':
         month = '1';
         break;
-      case 'Mar':
+      case 'Feb':
         month = '2';
         break;
-      case 'Apr':
+      case 'Mar':
         month = '3';
         break;
-      case 'May':
+      case 'Apr':
         month = '4';
         break;
-      case 'Jun':
+      case 'May':
         month = '5';
         break;
-      case 'Jul':
+      case 'Jun':
         month = '6';
         break;
-      case 'Aug':
+      case 'Jul':
         month = '7';
         break;
-      case 'Sep':
+      case 'Aug':
         month = '8';
         break;
-      case 'Oct':
+      case 'Sep':
         month = '9';
         break;
-      case 'Nov':
+      case 'Oct':
         month = '10';
         break;
-      case 'Dec':
+      case 'Nov':
         month = '11';
+        break;
+      case 'Dec':
+        month = '12';
         break;
     }
   return month;
@@ -91,11 +94,10 @@ export default class Calendar extends Component {
   // };
     constructor(props) {
     super(props);
-    console.log('yeah')
-    console.log(this.props.daysArray)
 
     this.state = {
-      daysArray: this.props.daysArray,
+      daysArrayNum: this.props.daysArrayNum,
+      daysArrayText: this.props.daysArrayText,
       dateSelected: true,
     }
 
@@ -109,9 +111,10 @@ export default class Calendar extends Component {
 
   }
   chooseDay = (day) => {
+
     //need to call reset if the day is changed.
     this.setState ({
-      dateSelected: true
+      dateSelected: true,
 
     })
     let selectedDay = String(day).split(" ").slice(0, 4);
@@ -120,26 +123,27 @@ export default class Calendar extends Component {
     //make API call for this selectedDay, alert in the meantime
     //alert(selectedDay);
 
+
     if (selectedDay === todayDate) {
-      console.log('today')
+      console.log('today');
       this.setState ({
         today: true,
       })
     }
     else {
       //hide the timer if another date is pressed.
-      console.log('not today')
+      // console.log('not today')
       this.setState ({
         today: false,
         duration: 'no data',
         entry: 'no entry'
       })
-    console.log(selectedDay);
-    console.log('new Date:');
-    console.log(new Date(selectedDay));
-    console.log(this.state.daysArray);
-    if (this.state.daysArray.indexOf(selectedDay)) {
-      console.log('right on!')
+    // console.log(selectedDay);
+    // console.log('new Date:');
+    // console.log(new Date(selectedDay));
+    // console.log(this.state.daysArray);
+    if (this.state.daysArrayNum.indexOf(selectedDay) >= 0) {
+       console.log('right on!')
     }
 
       // if(this.props.userData[selectedDay]) {
@@ -181,9 +185,9 @@ export default class Calendar extends Component {
       <div>
         <div style={style.calendar}>
           <DayPicker
-            initialMonth={new Date(year, month)}
+            initialMonth={new Date(year, month - 1)}
             todayButton="Go to Today"
-            selectedDays={this.state.daysArray}
+            selectedDays={this.state.daysArrayText}
             onDayClick={day => this.chooseDay(day)}
           />
           <Timer today={this.state.today} duration={this.state.duration}/>
