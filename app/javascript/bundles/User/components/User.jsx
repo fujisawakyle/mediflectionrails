@@ -50,9 +50,6 @@ export default class User extends React.Component {
         <h3>
           Happy meditating, {this.state.name}
         </h3>
-        <h3>
-          Time: {this.state.mediflection}
-        </h3>
           <Calendar daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.userData}/>
 
       </div>
