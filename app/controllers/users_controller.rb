@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @mediflections = @user.mediflections
-    #@login_props = { name: @user.name }
+    @mediflectionPost = User.find(1).mediflections.build
     @mediflection_props = { name: @user.name, mediflection: @mediflections }
   end
 

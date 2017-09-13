@@ -103,8 +103,6 @@ export default class Calendar extends Component {
       userData: this.props.userData,
       today: true,
     }
-    console.log('userData:');
-    console.log(this.state.userData);
 
     // for (let i = 0; i < weekArray.length ; i++) {
     //   if(!this.props.userData[weekArray[i]]) {
@@ -131,14 +129,12 @@ export default class Calendar extends Component {
 
 
     if (selectedDay === todayDate) {
-      console.log('today');
       this.setState ({
         today: true,
       })
     }
     else {
       //hide the timer if another date is pressed.
-      console.log('not today')
       this.setState ({
         today: false,
       })
@@ -153,7 +149,6 @@ export default class Calendar extends Component {
     //   })
     // }
     if (this.state.daysArrayNum.indexOf(selectedDay) >= 0) {
-      console.log('logged day selected');
       for(let data of this.state.userData) {
         if(selectedDay == data.date) {
           this.setState ({

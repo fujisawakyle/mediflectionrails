@@ -59,7 +59,6 @@ export default class Graph extends Component {
 
   render() {
     const daysArray = this.props.dates;
-    console.log('yo', daysArray)
     return (
         <div style={style.graph}>
 

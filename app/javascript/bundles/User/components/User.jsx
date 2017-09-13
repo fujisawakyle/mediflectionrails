@@ -36,6 +36,7 @@ export default class User extends React.Component {
       userData: data,
       daysArrayNum: daysArrayNum,
       daysArrayText: daysArrayText,
+      items: [],
     };
   }
 
@@ -43,10 +44,24 @@ export default class User extends React.Component {
     this.setState({ name });
   };
 
+  componentDidMount() {
+    $.getJSON('/api/v1/items.json', (response) => { this.setState({ items: response }) });
+  }
+
   render() {
+    let items= this.state.items.map((item) => {
+      return (
+        <div key={item.id}>
+          <h3>{item.name}</h3>
+          <p>{item.description}</p>
+          </div>
+      )
+    });
+
 
     return (
       <div>
+        {items}
         <h3>
           Happy meditating, {this.state.name}
         </h3>

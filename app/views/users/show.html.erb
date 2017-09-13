@@ -1,3 +1,10 @@
 <% provide(:title, "Go within") %>
 
 <%= react_component("User", props: @mediflection_props) %>
+
+<%= form_for(@mediflectionPost) do |f| %>
+  <div class="field">
+    <%= f.text_area :journal, placeholder: "Today's meditation was:" %>
+  </div>
+  <%= f.submit "Save", class: "btn btn-primary" %>
+<% end %>

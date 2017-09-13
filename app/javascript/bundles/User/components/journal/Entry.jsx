@@ -41,7 +41,17 @@ class Entry extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         let journalEntry = this.state.entry;
+        let name = "larry";
+        let description = "hello";
         alert('send info: ' + journalEntry);
+        $.ajax({
+            url: '/api/v1/items',
+            type: 'POST',
+            data: { item: { name: name, description: description } },
+            success: (response) => {
+                console.log('it worked!', response);
+            }
+        });
         //set up an object so that we can send it.
         //store to server (API call)
     }
