@@ -102,6 +102,7 @@ export default class Calendar extends Component {
       dateSelected: true,
       userData: this.props.userData,
       today: true,
+      user: this.props.user,
     }
 
     // for (let i = 0; i < weekArray.length ; i++) {
@@ -183,6 +184,8 @@ export default class Calendar extends Component {
     //     </div>
     //   )
     // }
+
+
     return (
       <div>
         <div style={style.calendar}>

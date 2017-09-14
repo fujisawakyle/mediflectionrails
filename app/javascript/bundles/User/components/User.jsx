@@ -6,6 +6,7 @@ import Journal from './journal/Journal';
 
 const daysArrayNum = [];
 const daysArrayText = [];
+const userArray = [];
 
 export default class User extends React.Component {
   // static propTypes = {
@@ -28,44 +29,85 @@ export default class User extends React.Component {
 
     // let arr = this.props.mediflection[0].journal
 
-    const arr = this.props.mediflection[0].created_at.slice(0,10);
+    //const arr = this.props.mediflection[0].created_at.slice(0,10);
 
     this.state = {
       name: this.props.name,
-      mediflection: arr,
       userData: data,
       daysArrayNum: daysArrayNum,
       daysArrayText: daysArrayText,
       items: [],
+      users: undefined,
     };
   }
 
-  updateName = (name) => {
-    this.setState({ name });
-  };
+  // updateName = (name) => {
+  //   this.setState({ name });
+  // };
 
   componentDidMount() {
-    $.getJSON('/api/v1/items.json', (response) => { this.setState({ items: response }) });
+    console.log('hi');
+    this.getDataFromApi();
+    // $.getJSON('/api/v1/items.json', (response) => { this.setState({ items: response }) });
+
+  }
+
+  // getDataFromApi = () => {
+  //   var self = this;
+  //   $.ajax({
+  //     url: '/api/users',
+  //     success: function(data) {
+  //       console.log(data);
+  //       self.setState({ users: data});
+  //     },
+  //     error: function(xhr, status, error) {
+  //       alert('cannot get data from API: ', error);
+  //     }
+  //   });
+  // }
+  getDataFromApi = () => {
+    console.log('run function');
+      fetch('/api/users')
+      .then(resp => resp.json())
+      .then(function(data) {
+        data.forEach(function(user) {
+          userArray.push(user.name);
+        });
+        console.log(userArray);
+
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
 
   render() {
-    let items= this.state.items.map((item) => {
-      return (
-        <div key={item.id}>
-          <h3>{item.name}</h3>
-          <p>{item.description}</p>
-          </div>
-      )
-    });
+    console.log('users state');
+    console.log(this.state.users);
+    // let items= this.state.items.map((item) => {
+    //   return (
+    //     <div key={item.id}>
+    //       <h3>{item.name}</h3>
+    //       <p>{item.description}</p>
+    //       </div>
+    //   )
+    // });
+
+
+
+    // const arr = [];
+    // this.state.users.forEach(function(user) {
+    //       arr.push(user.name);
+    //     }.bind(this));
 
 
     return (
-      <div>
-        {items}
+        <div>
+
         <h3>
           Happy meditating, {this.state.name}
         </h3>
-          <Calendar daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.userData}/>
+          <Calendar user={this.state.users} daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.userData}/>
 
       </div>
     );

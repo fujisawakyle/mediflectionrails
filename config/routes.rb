@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
-
   namespace :api do
-    namespace :v1 do
-      resources :items, only: [:index, :create, :destroy, :update]
-    end
+    resources :users
+    resources :mediflections
   end
+  # namespace :api do
+  #   namespace :v1 do
+  #     resources :items, only: [:index, :create, :destroy, :update]
+  #   end
+  # end
 
   get 'static_pages/home'
 
