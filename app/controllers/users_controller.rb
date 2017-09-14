@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  layout "user"
+  layout "application"
 
 
   def show
