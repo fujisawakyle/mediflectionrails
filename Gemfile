@@ -60,6 +60,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'react_on_rails', '9.0.0'
 gem 'bootstrap-sass', '3.3.7'
 gem 'responders'
-gem 'jquery-rails'
+gem 'devise'
+gem 'omniauth-facebook'
 
 gem 'mini_racer', platforms: :ruby
