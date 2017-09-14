@@ -4,8 +4,11 @@
 <%# greet user %>
 <h3> Happy meditating, <%= current_user.name %> </h3>
 
+<% if false %>
+<%= current_user.mediflections.all.inspect %>
+<% end %>
 
-<%= react_component("User") %>
+<%= react_component("User", props: { data: current_user.mediflections.all}) %>
 
 
 

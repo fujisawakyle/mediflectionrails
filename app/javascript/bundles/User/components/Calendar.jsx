@@ -31,9 +31,6 @@ const date = dateObj.getDate();
 const todayDate = `${year},${month},${date}`;
 let oneWeekAgo, dateAlter, formattedDate;
 
-    console.log('today date:')
-    console.log(todayDate);
-
 const weekArray = [];
 // for (let i = 0; i < 7; i ++){
 //   let oneWeekAgo = new Date()
@@ -191,7 +188,7 @@ export default class Calendar extends Component {
         <div style={style.calendar}>
           <DayPicker
             initialMonth={new Date(year, month - 1)}
-            todayButton="Go to Today"
+            todayButton="Go to current month"
             selectedDays={this.state.daysArrayText}
             onDayClick={day => this.chooseDay(day)}
           />

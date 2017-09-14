@@ -21,25 +21,22 @@ export default class User extends React.Component {
   constructor(props) {
     super(props);
 
-    // const data = this.props.mediflection;
-    // for(let i of data) {
-    //   daysArrayNum.push(i.date);
-    //   daysArrayText.push(new Date(i.date));
-    // }
-
-    // let arr = this.props.mediflection[0].journal
-
-    //const arr = this.props.mediflection[0].created_at.slice(0,10);
+    const data = this.props.data;
+    for(let i of data) {
+      daysArrayNum.push(i.date);
+      daysArrayText.push(new Date(i.date));
+    }
 
     this.state = {
       // name: this.props.name,
-      // userData: data,
+      userData: this.props.data,
       daysArrayNum: daysArrayNum,
       daysArrayText: daysArrayText,
       items: [],
       users: undefined,
     };
   }
+
 
   // updateName = (name) => {
   //   this.setState({ name });
@@ -92,7 +89,6 @@ export default class User extends React.Component {
     //       </div>
     //   )
     // });
-
 
 
     // const arr = [];
