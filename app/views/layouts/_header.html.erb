@@ -4,6 +4,10 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Portfolio", 'http://fujisawakyle.com', :target => "_blank" %></li>
+        <% if current_user %>
+        <li><%= link_to "Logout", destroy_user_session_path, method: :delete %>
+        </li>
+        <% end %>
       </ul>
     </nav>
   </div>

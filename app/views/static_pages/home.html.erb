@@ -1,9 +1,9 @@
-<% provide(:title, "Home") %>
+<% provide(:title, "Go within") %>
 <div class="center jumbotron">
 
 
   <% if current_user %>
-    <%= current_user.inspect %>
+    <%= render 'layouts/mediflections' %>
   <% end %>
 
   <% unless current_user %>
@@ -13,8 +13,6 @@
     Track your meditation, track your reflection
   </h2>
     <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class:'btn btn-primary' %>
-  <% else %>
-    <%= link_to "Logout", destroy_user_session_path, method: :delete, class:'btn btn-primary' %>
   <% end %>
 
 

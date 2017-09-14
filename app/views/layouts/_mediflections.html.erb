@@ -1,0 +1,11 @@
+<%# user profile pic %>
+<%= image_tag( current_user.image, :alt => "profile picture") %>
+
+<%# greet user %>
+<h3> Happy meditating, <%= current_user.name %> </h3>
+
+
+<%= react_component("User") %>
+
+
+
