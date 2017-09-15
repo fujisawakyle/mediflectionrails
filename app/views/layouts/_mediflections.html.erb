@@ -1,12 +1,5 @@
-<div class="l-site__user">
-  <%# user profile pic %>
-  <%= image_tag( current_user.image, :alt => "profile picture") %>
-
-  <%# greet user %>
-  <h3> Happy meditating, <%= current_user.name %> </h3>
-</div>
 <div class="l-site__components">
-  <%= react_component("User", props: { data: current_user.mediflections.all}) %>
+  <%= react_component("User", props: { name:current_user.name, data: current_user.mediflections.all}) %>
 </div>
 
 

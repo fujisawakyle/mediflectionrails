@@ -4,13 +4,12 @@ import Countdown from './Countdown';
 
 const style = {
     timerBox : {
-        backgroundColor: '#fdf',
+        background: 'rgba(255,255,255,0.3)',
         height: '200px',
         width: '250px',
         textAlign: 'center',
         margin: 'auto',
-        border: '1px solid black',
-        borderRadius: '10px'
+        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
     }
 }
 

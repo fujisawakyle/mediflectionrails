@@ -3,6 +3,7 @@ import DayPicker from 'react-day-picker';
 import Timer from './timer/Timer';
 import Journal from './journal/Journal';
 import WeekDisplay from './weekdisplay/WeekDisplay';
+import User2 from './User2';
 // import PropTypes from 'prop-types';
 
 const style = {
@@ -16,13 +17,12 @@ const style = {
       maxHeight: '60em',
     },
     weekdisplay : {
-      backgroundColor: '#dcf',
+      background: 'rgba(255,255,255,0.3)',
       textAlign: 'center',
-      border: '1px solid black',
-      borderRadius: '10px',
       paddingBottom: '10px',
       minWidth: '20em',
       width: '45%',
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
     },
     calendar: {
       display: 'flex',
@@ -31,6 +31,7 @@ const style = {
       width: '20em',
       height: '22em',
       background: 'rgba(255,255,255,0.3)',
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
     },
     timer : {
 
@@ -210,6 +211,7 @@ export default class Calendar extends Component {
     return (
       <div>
         <div style={style.container}>
+          <User2 name={this.props.name} />
           <div style = {style.weekdisplay}>
             <WeekDisplay dates={this.state.weekArray}/>
           </div>

@@ -12,29 +12,81 @@ $gray-medium-light: #eaeaea;
 }
 
 /*//////////////////////
+BREAKPOINTS
+//////////////////////*/
+@mixin breakpoint($class) {
+
+  @if $class == xxs {
+    @media (min-width: 200px) { @content; }
+  }
+
+  @else if $class == xs {
+    @media (min-width: 420px) { @content; }
+  }
+
+  @else if $class == sm {
+    @media (min-width: 640px) { @content; }
+  }
+
+  @else if $class == md {
+    @media (min-width: 768px) { @content; }
+  }
+
+  @else if $class == lg {
+    @media (min-width: 992px) { @content; }
+  }
+
+  @else if $class == xl {
+    @media (min-width: 1200px) { @content; }
+  }
+
+  @else if $class == xxl {
+    @media (min-width: 1600px) { @content; }
+  }
+
+  @else if $class == xxxl {
+    @media (min-width: 1900px) { @content; }
+  }
+
+  @else {
+    @warn "Breakpoint mixin supports: xs, sm, md, lg, xl, xxl, xxxl";
+  }
+}
+
+/*//////////////////////
+FLEXBOX
+//////////////////////*/
+@mixin flex-box($dir: false, $wrp: false, $jc: false, $ac: false, $ai: false) {
+  display: flex;
+  @if $dir { flex-direction: $dir; }
+  @if $wrp { flex-wrap: $wrp; }
+  @if $jc { justify-content: $jc; }
+  @if $ac { align-content: $ac; }
+  @if $ai { align-items: $ai; }
+}
+
+/*//////////////////////
 LAYOUT
 //////////////////////*/
 
 .l-site {
-  display:flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-box($jc: center, $ai: center);
+
   &__container {
     max-height: 60em;
     max-width: 80em;
-    border-radius: 10px;
-    border: 1px solid black;
-    background: rgba(255,255,255,0.5);
+    border:none;
+    background: rgba(255,255,255,0.2);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
   &__user {
-    height: 9em;
-    width:26em;
-    border-radius: 10px;
-    border: 1px solid black;
-    background: rgba(255,255,255,0.5);
+    @include flex-box($jc: center,  $ac: center);
+    height: 10em;
+    width:20em;
+    background: rgba(255,255,255,0.3);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 1em;
+    padding: 2em;
   }
   &__components {
     display:flex;
@@ -52,9 +104,18 @@ LAYOUT
 
 /* universal */
 
+html {
+
+}
+
 body {
   padding-top: 60px;
   background: linear-gradient(to left top, blue, red) fixed;
+  // background: url('northern-lights.svg') no-repeat center center fixed;
+  // -webkit-background-size: cover;
+  // -moz-background-size: cover;
+  // -o-background-size: cover;
+  // background-size: cover;
 }
 
 section {
