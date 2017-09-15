@@ -8,32 +8,93 @@ const style = {};
 
 const daysArrayNum = [];
 const daysArrayText = [];
+const weekArrayVal = [0, 0, 0, 0, 0, 0, 0];
+const weekArrayDate = [];
 const userArray = [];
+
+
+for (let i = 0; i < 7; i ++){
+  let oneWeekAgo = new Date()
+
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 6 + i);
+  let dateAlter = String(oneWeekAgo).split(' ').splice(1,3);
+  // if (dateAlter[1][0] == 0) {
+  //   dateAlter[1] = dateAlter[1].substr(1);
+  // }
+  dateAlter[0] = translateMonth(dateAlter[0]);
+  let formattedDate = `${dateAlter[2]},${dateAlter[0]},${dateAlter[1]}`;
+  weekArrayDate[i] = formattedDate
+}
+
+
+function translateMonth (month) {
+  switch (month) {
+      case 'Jan':
+        month = '1';
+        break;
+      case 'Feb':
+        month = '2';
+        break;
+      case 'Mar':
+        month = '3';
+        break;
+      case 'Apr':
+        month = '4';
+        break;
+      case 'May':
+        month = '5';
+        break;
+      case 'Jun':
+        month = '6';
+        break;
+      case 'Jul':
+        month = '7';
+        break;
+      case 'Aug':
+        month = '8';
+        break;
+      case 'Sep':
+        month = '9';
+        break;
+      case 'Oct':
+        month = '10';
+        break;
+      case 'Nov':
+        month = '11';
+        break;
+      case 'Dec':
+        month = '12';
+        break;
+    }
+  return month;
+}
 
 export default class User extends React.Component {
   // static propTypes = {
   //   name: PropTypes.string.isRequired, // this is passed from the Rails view
   // };
 
-  /**
-   * @param props - Comes from your rails view.
-   */
-
-
   constructor(props) {
     super(props);
 
     const data = this.props.data;
     for(let i of data) {
+      //add time to week array
+      let index = weekArrayDate.indexOf(i.date);
+      if(index >= 0) {
+        weekArrayVal[index] = i.time;
+      }
       daysArrayNum.push(i.date);
       daysArrayText.push(new Date(i.date));
     }
+    console.log(weekArrayVal);
 
     this.state = {
       // name: this.props.name,
       userData: this.props.data,
       daysArrayNum: daysArrayNum,
       daysArrayText: daysArrayText,
+      weekArrayVal: weekArrayVal,
       items: [],
       users: undefined,
     };
@@ -101,7 +162,7 @@ export default class User extends React.Component {
 
     return (
       <div style = {style.user}>
-          <Calendar user={this.state.users} daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.userData}/>
+          <Calendar user={this.state.users} weekArrayVal={this.state.weekArrayVal} daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.userData}/>
       </div>
     );
   }

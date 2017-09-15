@@ -11,6 +11,7 @@ const style = {
       flexWrap: 'wrap',
       flexDirection: 'row',
       justifyContent: 'center',
+      alignItems: 'center',
     },
     weekdisplay : {
       order: 1
@@ -32,20 +33,22 @@ const year = dateObj.getFullYear();
 const month = dateObj.getMonth() + 1;
 const date = dateObj.getDate();
 const todayDate = `${year},${month},${date}`;
-let oneWeekAgo, dateAlter, formattedDate;
+
 
 const weekArray = [];
-// for (let i = 0; i < 7; i ++){
-//   let oneWeekAgo = new Date()
-//   oneWeekAgo.setDate(oneWeekAgo.getDate() - 6 + i);
-//   let dateAlter = String(oneWeekAgo).split(' ').splice(1,3);
-//   if (dateAlter[1][0] == 0) {
-//     dateAlter[1] = dateAlter[1].substr(1);
-//   }
-//   dateAlter[0] = translateMonth(dateAlter[0]);
-//   const formattedDate = `${dateAlter[2]},${dateAlter[0]},${dateAlter[1]}`;
-//   weekArray[i] = formattedDate
-// }
+for (let i = 0; i < 7; i ++){
+  let oneWeekAgo = new Date()
+
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 6 + i);
+  let dateAlter = String(oneWeekAgo).split(' ').splice(1,3);
+  // if (dateAlter[1][0] == 0) {
+  //   dateAlter[1] = dateAlter[1].substr(1);
+  // }
+  dateAlter[0] = translateMonth(dateAlter[0]);
+  let formattedDate = `${dateAlter[2]},${dateAlter[0]},${dateAlter[1]}`;
+  weekArray[i] = formattedDate
+}
+
 
 function translateMonth (month) {
   switch (month) {
@@ -103,6 +106,7 @@ export default class Calendar extends Component {
       userData: this.props.userData,
       today: true,
       user: this.props.user,
+      weekArray: this.props.weekArrayVal
     }
 
     // for (let i = 0; i < weekArray.length ; i++) {
@@ -127,7 +131,6 @@ export default class Calendar extends Component {
     selectedDay = `${selectedDay[3]},${selectedDay[1]},${selectedDay[2]}`
     //make API call for this selectedDay, alert in the meantime
     //alert(selectedDay);
-
 
     if (selectedDay === todayDate) {
       this.setState ({
@@ -204,7 +207,7 @@ export default class Calendar extends Component {
             <Journal entry={this.state.entry} />
           </div>
           <div style = {style.weekdisplay}>
-            <WeekDisplay />
+            <WeekDisplay dates={this.state.weekArray}/>
           </div>
         </div>
       </div>
