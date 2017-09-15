@@ -4,7 +4,13 @@ import Calendar from './Calendar';
 import Timer from './timer/Timer';
 import Journal from './journal/Journal';
 
-const style = {};
+const style = {
+  user: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+};
 
 const daysArrayNum = [];
 const daysArrayText = [];

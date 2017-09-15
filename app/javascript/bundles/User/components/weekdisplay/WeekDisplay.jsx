@@ -3,11 +3,7 @@ import Graph from './Graph';
 
 const style = {
   weekDisplay : {
-      backgroundColor: '#dcf',
-      textAlign: 'center',
-      border: '1px solid black',
-      borderRadius: '10px',
-      paddingBottom: '10px'
+
   }
 }
 

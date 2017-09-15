@@ -12,18 +12,31 @@ const style = {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
+      maxWidth: '80em',
+      maxHeight: '60em',
     },
     weekdisplay : {
-      order: 1
+      backgroundColor: '#dcf',
+      textAlign: 'center',
+      border: '1px solid black',
+      borderRadius: '10px',
+      paddingBottom: '10px',
+      minWidth: '20em',
+      width: '45%',
     },
     calendar: {
-      order: 2
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '20em',
+      height: '22em',
+      background: 'rgba(255,255,255,0.3)',
     },
     timer : {
-      order: 3
+
     },
     journal : {
-      order: 4
+
     },
 
 }
@@ -192,6 +205,9 @@ export default class Calendar extends Component {
     return (
       <div>
         <div style={style.container}>
+          <div style = {style.weekdisplay}>
+            <WeekDisplay dates={this.state.weekArray}/>
+          </div>
           <div style={style.calendar}>
             <DayPicker
               initialMonth={new Date(year, month - 1)}
@@ -206,9 +222,7 @@ export default class Calendar extends Component {
           <div style = {style.journal}>
             <Journal entry={this.state.entry} />
           </div>
-          <div style = {style.weekdisplay}>
-            <WeekDisplay dates={this.state.weekArray}/>
-          </div>
+
         </div>
       </div>
   );
