@@ -12,6 +12,9 @@
     "react-dom": "^15.6.1",
     "react-on-rails": "^9.0.0"
   },
+  "scripts": {
+    "start": "foreman start -f Procfile.dev"
+  },
   "devDependencies": {
     "webpack-dev-server": "^2.7.1"
   }

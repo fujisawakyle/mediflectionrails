@@ -4,6 +4,8 @@ import Calendar from './Calendar';
 import Timer from './timer/Timer';
 import Journal from './journal/Journal';
 
+const style = {};
+
 const daysArrayNum = [];
 const daysArrayText = [];
 const userArray = [];
@@ -98,9 +100,8 @@ export default class User extends React.Component {
 
 
     return (
-        <div>
+      <div style = {style.user}>
           <Calendar user={this.state.users} daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.userData}/>
-
       </div>
     );
   }

@@ -6,22 +6,25 @@ import WeekDisplay from './weekdisplay/WeekDisplay';
 // import PropTypes from 'prop-types';
 
 const style = {
-    calendar : {
-      textAlign: 'center',
-    },
-    wrapper : {
+    container: {
       display: 'flex',
       flexWrap: 'wrap',
-      margin: 'auto',
+      flexDirection: 'row',
+      justifyContent: 'center',
     },
-    first : {
-      display: 'in-line',
-      flex: '1',
-      minWidth: '200px'
+    weekdisplay : {
+      order: 1
     },
-    second : {
-      flex: '1'
-    }
+    calendar: {
+      order: 2
+    },
+    timer : {
+      order: 3
+    },
+    journal : {
+      order: 4
+    },
+
 }
 
 const dateObj = new Date();
@@ -185,18 +188,25 @@ export default class Calendar extends Component {
 
     return (
       <div>
-        <div style={style.calendar}>
-          <DayPicker
-            initialMonth={new Date(year, month - 1)}
-            todayButton="Go to current month"
-            selectedDays={this.state.daysArrayText}
-            onDayClick={day => this.chooseDay(day)}
-          />
-          <Timer today={this.state.today} duration={this.state.duration}/>
-          <Journal entry={this.state.entry} />
-          <WeekDisplay />
+        <div style={style.container}>
+          <div style={style.calendar}>
+            <DayPicker
+              initialMonth={new Date(year, month - 1)}
+              todayButton="Go to current month"
+              selectedDays={this.state.daysArrayText}
+              onDayClick={day => this.chooseDay(day)}
+            />
+          </div>
+          <div style = {style.timer}>
+            <Timer today={this.state.today} duration={this.state.duration}/>
+          </div>
+          <div style = {style.journal}>
+            <Journal entry={this.state.entry} />
+          </div>
+          <div style = {style.weekdisplay}>
+            <WeekDisplay />
+          </div>
         </div>
-        {meditationUI}
       </div>
   );
   }
