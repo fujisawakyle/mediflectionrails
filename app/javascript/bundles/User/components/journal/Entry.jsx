@@ -14,12 +14,12 @@ const style = {
     }
 }
 
-class Entry extends Component {
+export default class Entry extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            entry: props.entry
+            entry: props.entry,
         }
 
     }
@@ -40,20 +40,12 @@ class Entry extends Component {
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        let journalEntry = this.state.entry;
-        let name = "larry";
-        let description = "hello";
-        alert('send info: ' + journalEntry);
-        $.ajax({
-            url: '/api/v1/items',
-            type: 'POST',
-            data: { item: { name: name, description: description } },
-            success: (response) => {
-                console.log('it worked!', response);
-            }
-        });
-        //set up an object so that we can send it.
-        //store to server (API call)
+        if(this.props.updateFlag) {
+            console.log('this needs to be an update');
+        }
+        else {
+        this.props.mediflectionSubmit({mediflection: {date: this.props.selectedDay, journal: this.state.entry}})
+        }
     }
     render() {
         return (
@@ -88,4 +80,4 @@ class Entry extends Component {
 // }
 
 
-export default Entry // connect(mapStateToProps, matchDispatchToProps)(Entry);
+// connect(mapStateToProps, matchDispatchToProps)(Entry);

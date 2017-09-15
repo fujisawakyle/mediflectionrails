@@ -38,7 +38,7 @@ class Journal extends Component {
         return (
         <div style={style.journalBox}>
             <h3>Journal</h3>
-            <Entry onJournalSubmit={this.handleJournalSubmit} entry={this.props.entry}/>
+            <Entry updateFlag={this.props.updateFlag} selectedDay={this.props.selectedDay} mediflectionSubmit={this.props.mediflectionSubmit} onJournalSubmit={this.handleJournalSubmit} entry={this.props.entry}/>
         </div>
     )
   }

@@ -46,7 +46,8 @@ const year = dateObj.getFullYear();
 const month = dateObj.getMonth() + 1;
 const date = dateObj.getDate();
 const todayDate = `${year},${month},${date}`;
-
+let selectedDay = '';
+let updateFlag = false;
 
 const weekArray = [];
 for (let i = 0; i < 7; i ++){
@@ -119,7 +120,8 @@ export default class Calendar extends Component {
       userData: this.props.userData,
       today: true,
       user: this.props.user,
-      weekArray: this.props.weekArrayVal
+      weekArray: this.props.weekArrayVal,
+
     }
 
     // for (let i = 0; i < weekArray.length ; i++) {
@@ -137,13 +139,11 @@ export default class Calendar extends Component {
     //need to call reset if the day is changed.
     this.setState ({
       dateSelected: true,
-
     })
-    let selectedDay = String(day).split(" ").slice(0, 4);
+    selectedDay = String(day).split(" ").slice(0, 4);
     selectedDay[1] = translateMonth(selectedDay[1]);
     selectedDay = `${selectedDay[3]},${selectedDay[1]},${selectedDay[2]}`
     //make API call for this selectedDay, alert in the meantime
-    //alert(selectedDay);
 
     if (selectedDay === todayDate) {
       this.setState ({
@@ -165,6 +165,7 @@ export default class Calendar extends Component {
     //     entry: 'no entry'
     //   })
     // }
+
     if (this.state.daysArrayNum.indexOf(selectedDay) >= 0) {
       for(let data of this.state.userData) {
         if(selectedDay == data.date) {
@@ -172,15 +173,19 @@ export default class Calendar extends Component {
             duration: data.time,
             entry: data.journal,
           })
+          updateFlag = true;
+
         }
       }
     }
     else {
+      updateFlag = false;
       this.setState ({
         duration: 'no data',
         entry: '',
       })
     }
+
   }
   render () {
     let meditationUI;
@@ -220,7 +225,7 @@ export default class Calendar extends Component {
             <Timer today={this.state.today} duration={this.state.duration}/>
           </div>
           <div style = {style.journal}>
-            <Journal entry={this.state.entry} />
+            <Journal updateFlag={updateFlag} selectedDay={selectedDay} mediflectionSubmit={this.props.mediflectionSubmit} entry={this.state.entry} />
           </div>
 
         </div>

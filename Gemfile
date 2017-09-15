@@ -62,5 +62,6 @@ gem 'bootstrap-sass', '3.3.7'
 gem 'responders'
 gem 'devise'
 gem 'omniauth-facebook'
+gem "jquery-rails"
 
 gem 'mini_racer', platforms: :ruby

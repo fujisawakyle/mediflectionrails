@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   # get 'users/new'
-
+  get 'mediflections', to: 'mediflections#index'
   # get 'hello_world', to: 'hello_world#index'
   # get 'signup', to: 'users#new'
   # post 'signup', to: 'users#create'

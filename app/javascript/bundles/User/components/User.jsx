@@ -106,6 +106,32 @@ export default class User extends React.Component {
     };
   }
 
+  mediflectionSubmit = (mediflectionData) => {
+    console.log(mediflectionData);
+    $.ajax({
+          url: "/mediflections",
+          dataType: 'json',
+          type: 'POST',
+          data: mediflectionData,
+
+          success: function(userData) {
+
+            this.setState({userData: userData});
+
+          }.bind(this),
+
+          error: function(response, status, err) {
+            console.log('response');
+            console.log(response);
+            console.log('err');
+            console.log(err);
+            console.log("An error occured")
+          }
+
+
+        });
+  }
+
 
   // updateName = (name) => {
   //   this.setState({ name });
@@ -168,7 +194,7 @@ export default class User extends React.Component {
 
     return (
       <div style = {style.user}>
-          <Calendar user={this.state.users} weekArrayVal={this.state.weekArrayVal} daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.userData}/>
+          <Calendar mediflectionSubmit={this.mediflectionSubmit} user={this.state.users} weekArrayVal={this.state.weekArrayVal} daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.userData}/>
       </div>
     );
   }
