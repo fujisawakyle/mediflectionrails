@@ -35,20 +35,28 @@ export default class Graph extends Component {
                 {
                     label: 'minutes',
                     data: this.props.dates,
-                    backgroundColor: 'blue'
+                    backgroundColor: '#4A90E2',
                 }
             ]
         },
         options: {
+            legend: {
+                labels: {
+                    fontColor: "white",
+                }
+            },
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero:true
+                        fontColor: "white",
+                        beginAtZero: true
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: "white",
                     }
                 }]
-            },
-            legend: {
-                display: false,
             }
         }
     };

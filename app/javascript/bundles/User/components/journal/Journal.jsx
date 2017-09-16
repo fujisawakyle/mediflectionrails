@@ -3,12 +3,7 @@ import Entry from './Entry';
 
 const style = {
     journalBox : {
-        background: 'rgba(255,255,255,0.3)',
-        height: '350px',
-        width: '250px',
-        textAlign: 'center',
-        margin: 'auto',
-        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
     }
 }
 

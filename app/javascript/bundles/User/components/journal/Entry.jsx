@@ -8,8 +8,8 @@ blank input field, if filled, display that in the input field.*/
 
 const style = {
     input : {
-        height : '230px',
-        width: '220px',
+        height : '17em',
+        width: '19em',
         textAlign: 'top'
     }
 }

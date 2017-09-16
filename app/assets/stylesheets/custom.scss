@@ -73,7 +73,7 @@ LAYOUT
   @include flex-box($jc: center, $ai: center);
 
   &__container {
-    max-height: 60em;
+    height:100vh;
     max-width: 80em;
     border:none;
     background: rgba(255,255,255,0.2);
@@ -94,11 +94,12 @@ LAYOUT
     align-items: center;
     max-height: 60em;
     max-width: 80em;
-
-
-
-
-
+    &--calendar {
+      @include breakpoint(sm) {
+        width:27em;
+        height:25em;
+      }
+    }
   }
 }
 
@@ -284,6 +285,15 @@ input {
 
 .DayPicker {
   display: inline-block;
+  background: rgba(255,255,255,.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 1em;
+  width: 22em;
+  height: 22em;
+  @include breakpoint(sm) {
+    width:27em;
+    height:25em;
+  };
 }
 
 .DayPicker-wrapper {
@@ -294,6 +304,7 @@ input {
   user-select: none;
   flex-direction: row;
   padding: 1rem 0;
+
 }
 
 .DayPicker-Month {
@@ -302,6 +313,7 @@ input {
   border-spacing: 0;
   user-select: none;
   margin: 0 1rem;
+  color: white;
 }
 
 .DayPicker-NavBar {
@@ -310,6 +322,7 @@ input {
   right: 0;
   padding: 0 .5rem;
   top: 0rem;
+  color: white;
 }
 
 .DayPicker-NavButton {
@@ -320,6 +333,7 @@ input {
   background-position: center;
   background-size: contain;
   cursor: pointer;
+  fill: white;
 }
 
 .DayPicker-NavButton--prev {
@@ -344,6 +358,7 @@ input {
 
 .DayPicker-Weekdays {
   display: table-header-group;
+
 }
 
 .DayPicker-WeekdaysRow {
@@ -355,7 +370,10 @@ input {
   padding: .5rem;
   font-size: .875em;
   text-align: center;
-  color: #000;
+  color: white;
+  @include breakpoint (sm) {
+    padding:2rem;
+  }
 }
 
 .DayPicker-Body {
@@ -369,10 +387,11 @@ input {
 .DayPicker-Day {
   display: table-cell;
   padding: 1rem;
-  border: 1px solid #000;
+  // border: 1px solid #000;
   text-align: center;
   cursor: pointer;
   vertical-align: middle;
+
 }
 
 .DayPicker-WeekNumber {
@@ -397,12 +416,11 @@ input {
 }
 
 .DayPicker-TodayButton {
-  border: none;
-  background-image: none;
-  background-color: transparent;
+  border: 1px solid white;
+  background-color: #4A90E2;
   box-shadow: none;
   cursor: pointer;
-  color: #4A90E2;
+  color: white;
   font-size: 0.875em;
   position:absolute;
   left:28.5%;
@@ -413,6 +431,7 @@ input {
 .DayPicker-Day--today {
   color: #fff;
   font-weight: 500;
+  border:2px solid white;
 }
 
 .DayPicker-Day--disabled {

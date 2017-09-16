@@ -11,33 +11,58 @@ const style = {
       display: 'flex',
       flexWrap: 'wrap',
       flexDirection: 'row',
-      justifyContent: 'center',
+      justifyContent: 'space-around',
       alignItems: 'center',
-      maxWidth: '80em',
+      maxWidth: '60em',
       maxHeight: '60em',
     },
-    weekdisplay : {
+    user : {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
       background: 'rgba(255,255,255,0.3)',
+      height: '11em',
+      width: '22em',
+      textAlign: 'center',
+      margin: 'auto',
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+      padding: '1em',
+      margin: '1em',
+      color: 'white',
+    },
+    weekdisplay : {
+      background: 'rgba(255,255,255,0.2)',
       textAlign: 'center',
       paddingBottom: '10px',
-      minWidth: '20em',
-      width: '45%',
+      width: '22em',
       boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+      margin: '1em',
+      color: 'white',
     },
     calendar: {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      width: '20em',
-      height: '22em',
-      background: 'rgba(255,255,255,0.3)',
-      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+      margin: '1em',
+
     },
     timer : {
-
+      background: 'rgba(255,255,255,0.3)',
+      height: '15em',
+      width: '22em',
+      textAlign: 'center',
+      margin: 'auto',
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+      margin: '1em',
     },
     journal : {
-
+      background: 'rgba(255,255,255,0.3)',
+      height: '25em',
+      width: '22em',
+      textAlign: 'center',
+      margin: 'auto',
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+      margin: '1em',
     },
 
 }
@@ -211,11 +236,13 @@ export default class Calendar extends Component {
     return (
       <div>
         <div style={style.container}>
-          <User2 name={this.props.name} />
+          <div style = {style.user}>
+            <User2 name={this.props.name} />
+          </div>
           <div style = {style.weekdisplay}>
             <WeekDisplay dates={this.state.weekArray}/>
           </div>
-          <div style={style.calendar}>
+          <div className="l-site__components--calendar" style={style.calendar}>
             <DayPicker
               initialMonth={new Date(year, month - 1)}
               todayButton="Go to current month"
