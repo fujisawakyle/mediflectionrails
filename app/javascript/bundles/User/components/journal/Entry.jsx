@@ -42,9 +42,10 @@ export default class Entry extends Component {
         event.preventDefault();
         if(this.props.updateFlag) {
             console.log('this needs to be an update');
+            this.props.mediflectionUpdate({mediflection: {id: this.props.id, date: this.props.selectedDay, duration: this.props.duration}});
         }
         else {
-        this.props.mediflectionSubmit({mediflection: {date: this.props.selectedDay, journal: this.state.entry}})
+            this.props.mediflectionSubmit({mediflection: {date: this.props.selectedDay, duration: this.props.duration, journal: this.state.entry}});
         }
     }
     render() {

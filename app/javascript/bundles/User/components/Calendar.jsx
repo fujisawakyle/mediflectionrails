@@ -198,6 +198,7 @@ export default class Calendar extends Component {
           this.setState ({
             duration: data.time,
             entry: data.journal,
+            id: data.id,
           })
           updateFlag = true;
 
@@ -251,10 +252,10 @@ export default class Calendar extends Component {
             />
           </div>
           <div style = {style.timer}>
-            <Timer today={this.state.today} duration={this.state.duration}/>
+            <Timer id={this.state.id} today={this.state.today} duration={this.state.duration}/>
           </div>
           <div style = {style.journal}>
-            <Journal updateFlag={updateFlag} selectedDay={selectedDay} mediflectionSubmit={this.props.mediflectionSubmit} entry={this.state.entry} />
+            <Journal id={this.state.id} duration={this.state.duration} updateFlag={updateFlag} selectedDay={selectedDay} mediflectionUpdate={this.props.mediflectionUpdate} mediflectionSubmit={this.props.mediflectionSubmit} entry={this.state.entry} />
           </div>
 
         </div>

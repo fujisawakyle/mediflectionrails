@@ -1,5 +1,5 @@
 class MediflectionsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_mediflection, only: [:show, :edit, :update, :destroy]
 
   def index
     # render json: User.find(1).mediflections.all
@@ -28,8 +28,9 @@ class MediflectionsController < ApplicationController
 
   def update
     respond_to do |f|
-      if @mediflection.update_attributes(mediflection_params)
+      if current_user.mediflections.find_by_date(mediflection_params[:date]).update_attributes(mediflection_params)
         f.html { redirect_to root_path, notice: "Mediflection was updated!"}
+        #f.json { render json: current_user.mediflections.find_by_date(mediflection_params[:date]) }
       else
         f.html { render :index }
       end

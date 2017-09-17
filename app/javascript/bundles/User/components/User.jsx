@@ -105,7 +105,7 @@ export default class User extends React.Component {
       users: undefined,
     };
   }
-
+// create a new journal //
   mediflectionSubmit = (mediflectionData) => {
     console.log(mediflectionData);
     $.ajax({
@@ -132,6 +132,34 @@ export default class User extends React.Component {
         });
   }
 
+// update an existing journal //
+  mediflectionUpdate = (mediflectionData) => {
+
+    console.log(mediflectionData);
+    console.log(mediflectionData.mediflection.id)
+    $.ajax({
+          url: "/mediflections/" + mediflectionData.mediflection.id,
+          dataType: 'json',
+          type: 'PUT',
+          data: mediflectionData,
+
+          success: function(userData) {
+
+            this.setState({userData: userData});
+
+          }.bind(this),
+
+          error: function(response, status, err) {
+            console.log('response');
+            console.log(response);
+            console.log('err');
+            console.log(err);
+            console.log("An error occured")
+          }
+
+
+        });
+  }
 
   // updateName = (name) => {
   //   this.setState({ name });
@@ -194,7 +222,10 @@ export default class User extends React.Component {
 
     return (
       <div style = {style.user}>
-          <Calendar mediflectionSubmit={this.mediflectionSubmit} user={this.state.users} weekArrayVal={this.state.weekArrayVal} name={this.props.name} daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.userData}/>
+          <Calendar mediflectionUpdate={this.mediflectionUpdate}
+           mediflectionSubmit={this.mediflectionSubmit} user={this.state.users} weekArrayVal={this.state.weekArrayVal} name={this.props.name} daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.userData}/>
+          }
+          }
       </div>
     );
   }
