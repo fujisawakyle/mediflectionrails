@@ -1,14 +1,11 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
+<header class="l-site__header">
+  <div class="header__logo">
     <%= link_to "mediflection", root_path, id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Portfolio", 'http://fujisawakyle.com', :target => "_blank" %></li>
-        <% if current_user %>
-        <li><%= link_to "Logout", destroy_user_session_path, method: :delete %>
-        </li>
-        <% end %>
-      </ul>
-    </nav>
+  </div>
+  <div class="header__nav">
+    <%= link_to "Portfolio", 'http://fujisawakyle.com', :target => "_blank", class:"nav__item" %>
+    <% if current_user %>
+    <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"nav__item" %>
+    <% end %>
   </div>
 </header>

@@ -25,11 +25,11 @@ BREAKPOINTS
   }
 
   @else if $class == sm {
-    @media (min-width: 640px) { @content; }
+    @media (min-width: 550px) { @content; }
   }
 
   @else if $class == md {
-    @media (min-width: 768px) { @content; }
+    @media (min-width: 700px) { @content; }
   }
 
   @else if $class == lg {
@@ -72,8 +72,18 @@ LAYOUT
 .l-site {
   @include flex-box($jc: center, $ai: center);
 
+  &__header {
+    @include flex-box($dir: row, $jc: space-between, $ac: center);
+    position: fixed;
+    top:0;
+    left:0;
+    height:4em;
+    width:100%;
+    background: rgba(255,255,255,0.4);
+  }
+
   &__container {
-    height:100vh;
+    height:75em;
     max-width: 80em;
     border:none;
     background: rgba(255,255,255,0.2);
@@ -81,7 +91,7 @@ LAYOUT
   }
   &__user {
     @include flex-box($jc: center,  $ac: center);
-    height: 10em;
+    height: 7.5em;
     width:20em;
     background: rgba(255,255,255,0.3);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -95,11 +105,39 @@ LAYOUT
     max-height: 60em;
     max-width: 80em;
     &--calendar {
-      @include breakpoint(sm) {
-        width:27em;
+      @include breakpoint(lg) {
+        width:28em;
         height:25em;
       }
     }
+  }
+}
+
+/*//////////////////////
+HEADER
+//////////////////////*/
+
+.header {
+  &__logo {
+    font-size: 2rem;
+    color: black;
+    padding-left:0.7em;
+  }
+  &__nav {
+    @include flex-box($dir: row, $wrp:nowrap, $ai: center);
+    padding-right: 1em;
+  }
+}
+
+/*//////////////////////
+NAV
+//////////////////////*/
+
+.nav {
+  &__item {
+    font-size: 1.5rem;
+    color: white;
+    padding-right:0.5em;
   }
 }
 
@@ -290,8 +328,8 @@ input {
   padding: 1em;
   width: 22em;
   height: 22em;
-  @include breakpoint(sm) {
-    width:27em;
+  @include breakpoint(lg) {
+    width:28em;
     height:25em;
   };
 }
@@ -371,7 +409,7 @@ input {
   font-size: .875em;
   text-align: center;
   color: white;
-  @include breakpoint (sm) {
+  @include breakpoint (lg) {
     padding:2rem;
   }
 }

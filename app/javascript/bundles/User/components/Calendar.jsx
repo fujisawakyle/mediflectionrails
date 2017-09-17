@@ -13,15 +13,15 @@ const style = {
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
-      maxWidth: '60em',
-      maxHeight: '60em',
+      maxWidth: '80em',
+      height: '60em',
     },
     user : {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       background: 'rgba(255,255,255,0.3)',
-      height: '11em',
+      height: '9em',
       width: '22em',
       textAlign: 'center',
       margin: 'auto',
@@ -195,14 +195,18 @@ export default class Calendar extends Component {
     if (this.state.daysArrayNum.indexOf(selectedDay) >= 0) {
       for(let data of this.state.userData) {
         if(selectedDay == data.date) {
+          if(!data.time) {
+            data.time = 'no data';
+          }
           this.setState ({
             duration: data.time,
             entry: data.journal,
             id: data.id,
           })
           updateFlag = true;
-
         }
+
+
       }
     }
     else {

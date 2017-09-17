@@ -1,7 +1,6 @@
 <% provide(:title, "Go within") %>
 <div class="l-site__container">
 
-
   <% if current_user %>
     <%= render 'layouts/mediflections' %>
   <% end %>
@@ -12,8 +11,7 @@
   <h2>
     Track your meditation, track your reflection
   </h2>
-    <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class:'btn btn-primary' %>
+    <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
   <% end %>
-
 
 </div>

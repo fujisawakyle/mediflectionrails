@@ -224,8 +224,6 @@ export default class User extends React.Component {
       <div style = {style.user}>
           <Calendar mediflectionUpdate={this.mediflectionUpdate}
            mediflectionSubmit={this.mediflectionSubmit} user={this.state.users} weekArrayVal={this.state.weekArrayVal} name={this.props.name} daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.userData}/>
-          }
-          }
       </div>
     );
   }
