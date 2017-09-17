@@ -199,7 +199,7 @@ export default class Calendar extends Component {
             data.time = 'no data';
           }
           this.setState ({
-            duration: data.time,
+            time: data.time,
             entry: data.journal,
             id: data.id,
           })
@@ -212,7 +212,7 @@ export default class Calendar extends Component {
     else {
       updateFlag = false;
       this.setState ({
-        duration: 'no data',
+        time: 'no data',
         entry: '',
       })
     }
@@ -244,9 +244,6 @@ export default class Calendar extends Component {
           <div style = {style.user}>
             <User2 name={this.props.name} />
           </div>
-          <div style = {style.weekdisplay}>
-            <WeekDisplay dates={this.state.weekArray}/>
-          </div>
           <div className="l-site__components--calendar" style={style.calendar}>
             <DayPicker
               initialMonth={new Date(year, month - 1)}
@@ -255,11 +252,14 @@ export default class Calendar extends Component {
               onDayClick={day => this.chooseDay(day)}
             />
           </div>
+          <div style = {style.weekdisplay}>
+            <WeekDisplay dates={this.state.weekArray}/>
+          </div>
           <div style = {style.timer}>
-            <Timer id={this.state.id} today={this.state.today} duration={this.state.duration}/>
+            <Timer id={this.state.id} today={this.state.today} time={this.state.time}/>
           </div>
           <div style = {style.journal}>
-            <Journal id={this.state.id} duration={this.state.duration} updateFlag={updateFlag} selectedDay={selectedDay} mediflectionUpdate={this.props.mediflectionUpdate} mediflectionSubmit={this.props.mediflectionSubmit} entry={this.state.entry} />
+            <Journal id={this.state.id} time={this.state.time} updateFlag={updateFlag} selectedDay={selectedDay} mediflectionUpdate={this.props.mediflectionUpdate} mediflectionSubmit={this.props.mediflectionSubmit} entry={this.state.entry} />
           </div>
 
         </div>

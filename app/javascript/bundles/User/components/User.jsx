@@ -140,12 +140,16 @@ export default class User extends React.Component {
     $.ajax({
           url: "/mediflections/" + mediflectionData.mediflection.id,
           dataType: 'json',
-          type: 'PUT',
+          type: 'PATCH',
           data: mediflectionData,
 
           success: function(userData) {
+            console.log('ajax userData');
+            console.log(userData);
 
             this.setState({userData: userData});
+            console.log('this.state.userData');
+            console.log(this.state.userData);
 
           }.bind(this),
 

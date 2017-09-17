@@ -65,7 +65,7 @@ class Clock extends Component {
         return (
             <div>
                 {timeInput}
-                <Countdown today={this.props.today} duration={this.props.duration} callback={this.toggleInputShow} seconds={this.state.seconds} logTime={60} />
+                <Countdown today={this.props.today} time={this.props.time} callback={this.toggleInputShow} seconds={this.state.seconds} logTime={60} />
 
             </div>
         )

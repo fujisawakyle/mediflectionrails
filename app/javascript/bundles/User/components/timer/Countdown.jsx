@@ -110,7 +110,7 @@ class Countdown extends Component {
         timerDisplay = <button onClick={this.resetTimer}>Reset</button>
       }
     } else {
-      timerDisplay = <div> {this.props.duration} </div>
+      timerDisplay = <div> {this.props.time} </div>
     }
     return(
       <div>

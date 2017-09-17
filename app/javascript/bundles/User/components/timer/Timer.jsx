@@ -17,7 +17,7 @@ class Timer extends Component {
         return (
             <div style={style.timerBox} className='timerBox'>
                 <h3>Timer</h3>
-                <Clock today={this.props.today} duration={this.props.duration}/>
+                <Clock today={this.props.today} time={this.props.time}/>
             </div>
         )
     }

@@ -32,7 +32,7 @@ class Journal extends Component {
         return (
         <div style={style.journalBox}>
             <h3>Journal</h3>
-            <Entry id={this.props.id} duration={this.props.duration} mediflectionUpdate={this.props.mediflectionUpdate} updateFlag={this.props.updateFlag} selectedDay={this.props.selectedDay} mediflectionSubmit={this.props.mediflectionSubmit} onJournalSubmit={this.handleJournalSubmit} entry={this.props.entry}/>
+            <Entry id={this.props.id} time={this.props.time} mediflectionUpdate={this.props.mediflectionUpdate} updateFlag={this.props.updateFlag} selectedDay={this.props.selectedDay} mediflectionSubmit={this.props.mediflectionSubmit} onJournalSubmit={this.handleJournalSubmit} entry={this.props.entry}/>
         </div>
     )
   }

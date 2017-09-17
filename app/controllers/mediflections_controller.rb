@@ -30,9 +30,10 @@ class MediflectionsController < ApplicationController
     respond_to do |f|
       if current_user.mediflections.find_by_date(mediflection_params[:date]).update_attributes(mediflection_params)
         f.html { redirect_to root_path, notice: "Mediflection was updated!"}
-        #f.json { render json: current_user.mediflections.find_by_date(mediflection_params[:date]) }
+        f.json { render json: current_user.mediflections.find_by_date(mediflection_params[:date]) }
       else
         f.html { render :index }
+        f.json { render json: current_user.mediflections.errors, status: :unprocessable_entity }
       end
     end
   end
