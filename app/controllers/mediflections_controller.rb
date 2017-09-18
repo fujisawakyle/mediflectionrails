@@ -11,7 +11,8 @@ class MediflectionsController < ApplicationController
 
     respond_to do |f|
       if @mediflection.save
-        f.html {redirect_to root_path, notice: "Mediflection was created!"}
+
+        f.html {redirect_to :back, notice: "Mediflection was created!"}
 
         f.json { render json: current_user.mediflections.all }
       else

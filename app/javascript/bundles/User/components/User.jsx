@@ -83,17 +83,17 @@ export default class User extends React.Component {
   constructor(props) {
     super(props);
 
-    const data = this.props.data;
-    for(let i of data) {
-      //add time to week array
-      let index = weekArrayDate.indexOf(i.date);
-      if(index >= 0) {
-        weekArrayVal[index] = i.time;
-      }
-      daysArrayNum.push(i.date);
-      daysArrayText.push(new Date(i.date));
-    }
-    console.log(weekArrayVal);
+    // const data = this.props.data;
+    // for(let i of data) {
+    //   //add time to week array
+    //   let index = weekArrayDate.indexOf(i.date);
+    //   if(index >= 0) {
+    //     weekArrayVal[index] = i.time;
+    //   }
+    //   daysArrayNum.push(i.date);
+    //   daysArrayText.push(new Date(i.date));
+    // }
+    // console.log(weekArrayVal);
 
     this.state = {
       // name: this.props.name,
@@ -105,9 +105,10 @@ export default class User extends React.Component {
       users: undefined,
     };
   }
+
 // create a new journal //
   mediflectionSubmit = (mediflectionData) => {
-    console.log(mediflectionData);
+    //console.log(mediflectionData);
     $.ajax({
           url: "/mediflections",
           dataType: 'json',
@@ -117,6 +118,8 @@ export default class User extends React.Component {
           success: function(userData) {
 
             this.setState({userData: userData});
+            // console.log('this.state.userData');
+            // console.log(this.state.userData);
 
           }.bind(this),
 
@@ -148,8 +151,7 @@ export default class User extends React.Component {
             console.log(userData);
 
             this.setState({userData: userData});
-            console.log('this.state.userData');
-            console.log(this.state.userData);
+
 
           }.bind(this),
 
@@ -206,6 +208,21 @@ export default class User extends React.Component {
   // }
 
   render() {
+
+    const data = this.state.userData;
+    for(let i of data) {
+      console.log('data from this.state.userData')
+      console.log(i);
+      //add time to week array
+      let index = weekArrayDate.indexOf(i.date);
+      if(index >= 0){
+        weekArrayVal[index] = i.time;
+      }
+      if(daysArrayNum.indexOf(i.date) < 0) {
+        daysArrayNum.push(i.date);
+        daysArrayText.push(new Date(i.date));
+      }
+    }
     // console.log('users state');
     // console.log(this.state.users);
     // let items= this.state.items.map((item) => {

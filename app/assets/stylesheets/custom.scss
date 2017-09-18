@@ -1,9 +1,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
+@import "font-awesome";
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
+$pri-blu: #4A90E2;
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -79,7 +80,8 @@ LAYOUT
     left:0;
     height:4em;
     width:100%;
-    background: rgba(255,255,255,0.4);
+    background: $pri-blu;
+    z-index: 1;
   }
 
   &__container {
@@ -119,8 +121,9 @@ HEADER
 
 .header {
   &__logo {
-    font-size: 2rem;
-    color: black;
+    @include flex-box($ai: center);
+    font-size: 3rem;
+    color: white;
     padding-left:0.7em;
   }
   &__nav {
@@ -141,6 +144,19 @@ NAV
   }
 }
 
+/*//////////////////////
+NAV
+//////////////////////*/
+
+.button {
+  border: 1px solid white;
+  background-color: $pri-blu;
+  box-shadow: none;
+  cursor: pointer;
+  color: white;
+  font-size: 0.875em;
+}
+
 /* universal */
 
 html {
@@ -149,7 +165,7 @@ html {
 
 body {
   padding-top: 60px;
-  background: linear-gradient(to left top, blue, red) fixed;
+  background: linear-gradient(to left top, blue, green) fixed;
   // background: url('northern-lights.svg') no-repeat center center fixed;
   // -webkit-background-size: cover;
   // -moz-background-size: cover;
@@ -396,7 +412,6 @@ input {
 
 .DayPicker-Weekdays {
   display: table-header-group;
-
 }
 
 .DayPicker-WeekdaysRow {
@@ -409,6 +424,9 @@ input {
   font-size: .875em;
   text-align: center;
   color: white;
+  abbr {
+    cursor:default;
+  }
   @include breakpoint (lg) {
     padding:2rem;
   }
@@ -425,7 +443,7 @@ input {
 .DayPicker-Day {
   display: table-cell;
   padding: 1rem;
-  // border: 1px solid #000;
+  //border: 1px solid #000;
   text-align: center;
   cursor: pointer;
   vertical-align: middle;
@@ -455,7 +473,7 @@ input {
 
 .DayPicker-TodayButton {
   border: 1px solid white;
-  background-color: #4A90E2;
+  background-color: $pri-blu;
   box-shadow: none;
   cursor: pointer;
   color: white;
@@ -469,7 +487,7 @@ input {
 .DayPicker-Day--today {
   color: #fff;
   font-weight: 500;
-  border:2px solid white;
+  border:2px dotted white;
 }
 
 .DayPicker-Day--disabled {
@@ -495,7 +513,14 @@ input {
 
 .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
   color: #FFF;
-  background-color: #4A90E2;
+  background-color: $pri-blu;
+}
+
+.DayPicker-Day:focus {
+  outline-style:none;
+  box-shadow:none;
+  border-color:transparent;
+  border: 1px solid white;
 }
 
 /* DayPickerInput */

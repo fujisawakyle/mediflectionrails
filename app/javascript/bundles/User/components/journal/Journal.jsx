@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Entry from './Entry';
 
 const style = {
-    journalBox : {
-
+    journal : {
+        color: 'white',
     }
 }
 
@@ -30,7 +30,7 @@ class Journal extends Component {
 
     render() {
         return (
-        <div style={style.journalBox}>
+        <div style={style.journal}>
             <h3>Journal</h3>
             <Entry id={this.props.id} time={this.props.time} mediflectionUpdate={this.props.mediflectionUpdate} updateFlag={this.props.updateFlag} selectedDay={this.props.selectedDay} mediflectionSubmit={this.props.mediflectionSubmit} onJournalSubmit={this.handleJournalSubmit} entry={this.props.entry}/>
         </div>

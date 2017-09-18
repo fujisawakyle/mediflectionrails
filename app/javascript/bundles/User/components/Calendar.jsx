@@ -160,6 +160,12 @@ export default class Calendar extends Component {
 
   }
 
+  componentWillReceiveProps(nextProps) {
+      console.log('in calendar nextProps');
+      console.log(nextProps);
+      this.setState({daysArrayNum: nextProps.daysArrayNum});
+    }
+
   chooseDay = (day) => {
 
     //need to call reset if the day is changed.
@@ -219,7 +225,8 @@ export default class Calendar extends Component {
 
   }
   render () {
-    let meditationUI;
+
+    // let meditationUI;
     // if (this.state.dateSelected) {
     //   meditationUI = ( <div style={style.container}>
     //       <div style={style.first}>

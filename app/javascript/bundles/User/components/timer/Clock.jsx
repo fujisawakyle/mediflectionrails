@@ -4,9 +4,11 @@ import Countdown from './Countdown';
 const style = {
 
     clockDisplay : {
-        width: '40px',
+        width: '55px',
         height: '30px',
-        fontSize: '1.5em'
+        fontSize: '1.5em',
+        color: '#4A90E2',
+        textAlign: 'right',
     }
 }
 
@@ -44,7 +46,9 @@ class Clock extends Component {
         })
     }
 
+
     render () {
+        let minutes = ' minutes';
         let timeInput;
         if (this.state.showInput && this.props.today) {
             timeInput = (
@@ -56,7 +60,7 @@ class Clock extends Component {
                         value={this.state.value}
                         onChange={this.handleChange}>
                     </input>
-                        minutes
+                     {minutes}
                 </div>)
         }
         else {

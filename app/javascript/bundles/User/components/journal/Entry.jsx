@@ -9,8 +9,9 @@ blank input field, if filled, display that in the input field.*/
 const style = {
     input : {
         height : '17em',
-        width: '19em',
-        textAlign: 'top'
+        width: '20em',
+        textAlign: 'top',
+        color: '#4A90E2',
     }
 }
 
