@@ -1,6 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "font-awesome";
+
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
@@ -165,7 +165,7 @@ html {
 
 body {
   padding-top: 60px;
-  background: linear-gradient(to left top, blue, green) fixed;
+  background: linear-gradient(to left top, #20a5e8, green) fixed;
   // background: url('northern-lights.svg') no-repeat center center fixed;
   // -webkit-background-size: cover;
   // -moz-background-size: cover;

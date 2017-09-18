@@ -20,33 +20,52 @@ export default class Entry extends Component {
         super(props);
 
         this.state = {
-            entry: props.entry,
+            journal: props.journal,
         }
 
     }
-     componentWillReceiveProps(nextProps) {
-        if (nextProps.entry !== this.props.entry) {
+    componentWillReceiveProps(nextProps) {
+        // console.log('Entry CWRP nextProps');
+        // console.log(nextProps);
+        // console.log('Entry CWRP this.props.entry');
+        // console.log(this.props.journal);
+        // console.log('Entry CWRP this.state.entry');
+        // console.log(this.state.journal);
+        if (nextProps.journal !== this.props.journal) {
             this.setState({
-                entry: nextProps.entry,
+                journal: nextProps.journal,
             })
         }
+    }
+    resetState = () => {
+        // console.log('inside resetState');
+        // console.log('this.state.journal');
+        // console.log(this.state.journal);
+        // console.log('this.props.journal');
+        // console.log(this.props.journal);
+        this.setState({journal: this.state.journal})
     }
     handleChange = (event) => {
         const value = event.target.value;
 
         this.setState({
-                entry: value
+                journal: value
 
         })
     }
     handleSubmit = (event) => {
         event.preventDefault();
         if(this.props.updateFlag) {
-            console.log('this needs to be an update');
-            this.props.mediflectionUpdate({mediflection: {id: this.props.id, date: this.props.selectedDay, time: this.props.duration, journal: this.state.entry}});
+            // console.log('this needs to be an update');
+            this.props.mediflectionUpdate({mediflection: {id: this.props.id, date: this.props.selectedDay, time: this.props.duration, journal: this.state.journal}});
         }
         else {
-            this.props.mediflectionSubmit({mediflection: {date: this.props.selectedDay, time: this.props.time, journal: this.state.entry}});
+            this.props.mediflectionSubmit({mediflection: {date: this.props.selectedDay, time: this.props.time, journal: this.state.journal}});
+            // console.log('before reset');
+            // console.log(this.state.journal);
+            this.resetState();
+            // console.log('after reset');
+            // console.log(this.state.journal);
         }
     }
     render() {
@@ -55,7 +74,7 @@ export default class Entry extends Component {
             <textarea
                 placeholder="Today's meditation was:"
                 autoComplete='off'
-                value={this.state.entry}
+                value={this.state.journal}
                 onChange={this.handleChange}
                 style={style.input}
             />
@@ -82,4 +101,4 @@ export default class Entry extends Component {
 // }
 
 
-// connect(mapStateToProps, matchDispatchToProps)(Entry);
+// connect(mapStateToProps, matchDispatchToProps)(journal);

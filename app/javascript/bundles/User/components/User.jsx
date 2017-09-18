@@ -12,6 +12,13 @@ const style = {
   }
 };
 
+const dateObj = new Date();
+const year = dateObj.getFullYear();
+const month = dateObj.getMonth() + 1;
+const date = dateObj.getDate();
+const todayDate = `${year},${month},${date}`;
+let selectedDay = '';
+let updateFlag = false;
 const daysArrayNum = [];
 const daysArrayText = [];
 const weekArrayVal = [0, 0, 0, 0, 0, 0, 0];
@@ -31,7 +38,6 @@ for (let i = 0; i < 7; i ++){
   let formattedDate = `${dateAlter[2]},${dateAlter[0]},${dateAlter[1]}`;
   weekArrayDate[i] = formattedDate
 }
-
 
 function translateMonth (month) {
   switch (month) {
@@ -83,30 +89,17 @@ export default class User extends React.Component {
   constructor(props) {
     super(props);
 
-    // const data = this.props.data;
-    // for(let i of data) {
-    //   //add time to week array
-    //   let index = weekArrayDate.indexOf(i.date);
-    //   if(index >= 0) {
-    //     weekArrayVal[index] = i.time;
-    //   }
-    //   daysArrayNum.push(i.date);
-    //   daysArrayText.push(new Date(i.date));
-    // }
-    // console.log(weekArrayVal);
-
     this.state = {
-      // name: this.props.name,
       userData: this.props.data,
       daysArrayNum: daysArrayNum,
       daysArrayText: daysArrayText,
       weekArrayVal: weekArrayVal,
-      items: [],
       users: undefined,
+      postFlag: false,
     };
   }
 
-// create a new journal //
+  // create a new journal //
   mediflectionSubmit = (mediflectionData) => {
     //console.log(mediflectionData);
     $.ajax({
@@ -117,9 +110,12 @@ export default class User extends React.Component {
 
           success: function(userData) {
 
-            this.setState({userData: userData});
-            // console.log('this.state.userData');
-            // console.log(this.state.userData);
+            this.setState({
+              userData: userData,
+              postFlag: true,
+            });
+            console.log('this.state.userData');
+            console.log(this.state.userData);
 
           }.bind(this),
 
@@ -135,11 +131,11 @@ export default class User extends React.Component {
         });
   }
 
-// update an existing journal //
+  // update an existing journal //
   mediflectionUpdate = (mediflectionData) => {
 
-    console.log(mediflectionData);
-    console.log(mediflectionData.mediflection.id)
+    // console.log(mediflectionData);
+    // console.log(mediflectionData.mediflection.id)
     $.ajax({
           url: "/mediflections/" + mediflectionData.mediflection.id,
           dataType: 'json',
@@ -147,8 +143,8 @@ export default class User extends React.Component {
           data: mediflectionData,
 
           success: function(userData) {
-            console.log('ajax userData');
-            console.log(userData);
+            // console.log('ajax userData');
+            // console.log(userData);
 
             this.setState({userData: userData});
 
@@ -167,52 +163,63 @@ export default class User extends React.Component {
         });
   }
 
-  // updateName = (name) => {
-  //   this.setState({ name });
-  // };
+  chooseDay = (day) => {
 
-  // componentDidMount() {
-  //   console.log('hi');
-  //   this.getDataFromApi();
-    // $.getJSON('/api/v1/items.json', (response) => { this.setState({ items: response }) });
 
-  // }
+    selectedDay = String(day).split(" ").slice(0, 4);
+    selectedDay[1] = translateMonth(selectedDay[1]);
+    selectedDay = `${selectedDay[3]},${selectedDay[1]},${selectedDay[2]}`;
 
-  // getDataFromApi = () => {
-  //   var self = this;
-  //   $.ajax({
-  //     url: '/api/users',
-  //     success: function(data) {
-  //       console.log(data);
-  //       self.setState({ users: data});
-  //     },
-  //     error: function(xhr, status, error) {
-  //       alert('cannot get data from API: ', error);
-  //     }
-  //   });
-  // }
-  // getDataFromApi = () => {
-  //   console.log('run function');
-  //     fetch('/api/users')
-  //     .then(resp => resp.json())
-  //     .then(function(data) {
-  //       data.forEach(function(user) {
-  //         userArray.push(user.name);
-  //       });
-  //       console.log(userArray);
 
-  //     })
-  //     .catch(function(error) {
-  //       console.log(error);
-  //     });
-  // }
+    this.setState ({
+      dateSelected: true,
+      selectedDay: selectedDay,
+    })
 
+    if (selectedDay === todayDate) {
+      this.setState ({
+        today: true,
+      })
+    }
+    else {
+      //hide the timer if another date is pressed.
+      this.setState ({
+        today: false,
+      })
+    }
+
+    if (this.state.daysArrayNum.indexOf(selectedDay) >= 0) {
+      for(let data of this.state.userData) {
+        if(selectedDay == data.date) {
+          if(!data.time) {
+            data.time = 'no data';
+          }
+          this.setState ({
+            time: data.time,
+            journal: data.journal,
+            id: data.id,
+          })
+          updateFlag = true;
+        }
+
+
+      }
+    }
+    else {
+      updateFlag = false;
+      this.setState ({
+        time: 'no data',
+        journal: '',
+      })
+    }
+    // console.log('in chooseDay');
+    // console.log('this.state.journal');
+    // console.log(this.state.journal);
+  }
   render() {
 
     const data = this.state.userData;
     for(let i of data) {
-      console.log('data from this.state.userData')
-      console.log(i);
       //add time to week array
       let index = weekArrayDate.indexOf(i.date);
       if(index >= 0){
@@ -223,28 +230,26 @@ export default class User extends React.Component {
         daysArrayText.push(new Date(i.date));
       }
     }
-    // console.log('users state');
-    // console.log(this.state.users);
-    // let items= this.state.items.map((item) => {
-    //   return (
-    //     <div key={item.id}>
-    //       <h3>{item.name}</h3>
-    //       <p>{item.description}</p>
-    //       </div>
-    //   )
-    // });
-
-
-    // const arr = [];
-    // this.state.users.forEach(function(user) {
-    //       arr.push(user.name);
-    //     }.bind(this));
-
 
     return (
       <div style = {style.user}>
-          <Calendar mediflectionUpdate={this.mediflectionUpdate}
-           mediflectionSubmit={this.mediflectionSubmit} user={this.state.users} weekArrayVal={this.state.weekArrayVal} name={this.props.name} daysArrayText={this.state.daysArrayText} daysArrayNum={this.state.daysArrayNum} userData={this.state.userData}/>
+          <Calendar
+            chooseDay={this.chooseDay}
+            mediflectionUpdate={this.mediflectionUpdate}
+            mediflectionSubmit={this.mediflectionSubmit}
+            time={this.state.time}
+            journal={this.state.journal}
+            weekArrayVal={this.state.weekArrayVal}
+            name={this.props.name}
+            daysArrayText={this.state.daysArrayText}
+            daysArrayNum={this.state.daysArrayNum}
+            userData={this.state.userData}
+            selectedDay={selectedDay}
+            postFlag={this.state.postFlag}
+            updateFlag={updateFlag}
+            year={year}
+            month={month}
+          />
       </div>
     );
   }
