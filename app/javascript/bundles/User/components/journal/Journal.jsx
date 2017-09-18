@@ -7,7 +7,9 @@ const style = {
     }
 }
 
-class Journal extends Component {
+
+
+export default class Journal extends Component {
     constructor(props) {
         super(props);
 
@@ -16,14 +18,28 @@ class Journal extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+      if (nextProps.journal !== this.props.journal) {
+        this.setState({
+          journal: nextProps.journal,
+        })
+      }
+    }
+
     render() {
         return (
         <div style={style.journal}>
             <h3>Journal</h3>
-            <Entry id={this.props.id} time={this.props.time} mediflectionUpdate={this.props.mediflectionUpdate} updateFlag={this.props.updateFlag} selectedDay={this.props.selectedDay} mediflectionSubmit={this.props.mediflectionSubmit} journal={this.props.journal}/>
+            <Entry
+                id={this.props.id}
+                time={this.props.time}
+                mediflectionUpdate={this.props.mediflectionUpdate}
+                updateFlag={this.props.updateFlag}
+                selectedDay={this.props.selectedDay}
+                mediflectionSubmit={this.props.mediflectionSubmit}
+                journal={this.props.journal}/>
         </div>
     )
   }
 }
 
-export default Journal;

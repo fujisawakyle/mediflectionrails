@@ -56,14 +56,15 @@ export default class Entry extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         if(this.props.updateFlag) {
-            // console.log('this needs to be an update');
+            console.log('this needs to be an update');
             this.props.mediflectionUpdate({mediflection: {id: this.props.id, date: this.props.selectedDay, time: this.props.duration, journal: this.state.journal}});
+            console.log('after this');
         }
         else {
             this.props.mediflectionSubmit({mediflection: {date: this.props.selectedDay, time: this.props.time, journal: this.state.journal}});
             // console.log('before reset');
             // console.log(this.state.journal);
-            this.resetState();
+            //this.resetState();
             // console.log('after reset');
             // console.log(this.state.journal);
         }

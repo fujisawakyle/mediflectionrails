@@ -18,6 +18,7 @@ const month = dateObj.getMonth() + 1;
 const date = dateObj.getDate();
 const todayDate = `${year},${month},${date}`;
 let selectedDay = '';
+let postFlag = false;
 let updateFlag = false;
 const daysArrayNum = [];
 const daysArrayText = [];
@@ -95,7 +96,7 @@ export default class User extends React.Component {
       daysArrayText: daysArrayText,
       weekArrayVal: weekArrayVal,
       users: undefined,
-      postFlag: false,
+      journal: '',
     };
   }
 
@@ -109,11 +110,11 @@ export default class User extends React.Component {
           data: mediflectionData,
 
           success: function(userData) {
-
+            postFlag = true;
             this.setState({
               userData: userData,
-              postFlag: true,
             });
+
             console.log('this.state.userData');
             console.log(this.state.userData);
 
@@ -134,8 +135,8 @@ export default class User extends React.Component {
   // update an existing journal //
   mediflectionUpdate = (mediflectionData) => {
 
-    // console.log(mediflectionData);
-    // console.log(mediflectionData.mediflection.id)
+    console.log(mediflectionData);
+    console.log(mediflectionData.mediflection.id)
     $.ajax({
           url: "/mediflections/" + mediflectionData.mediflection.id,
           dataType: 'json',
@@ -164,18 +165,15 @@ export default class User extends React.Component {
   }
 
   chooseDay = (day) => {
-
+    postFlag = false;
 
     selectedDay = String(day).split(" ").slice(0, 4);
     selectedDay[1] = translateMonth(selectedDay[1]);
     selectedDay = `${selectedDay[3]},${selectedDay[1]},${selectedDay[2]}`;
-
-
     this.setState ({
       dateSelected: true,
       selectedDay: selectedDay,
     })
-
     if (selectedDay === todayDate) {
       this.setState ({
         today: true,
@@ -189,6 +187,7 @@ export default class User extends React.Component {
     }
 
     if (this.state.daysArrayNum.indexOf(selectedDay) >= 0) {
+      console.log('if');
       for(let data of this.state.userData) {
         if(selectedDay == data.date) {
           if(!data.time) {
@@ -206,15 +205,16 @@ export default class User extends React.Component {
       }
     }
     else {
+      console.log('else');
       updateFlag = false;
       this.setState ({
         time: 'no data',
         journal: '',
       })
     }
-    // console.log('in chooseDay');
-    // console.log('this.state.journal');
-    // console.log(this.state.journal);
+
+    console.log('chooseDay state.journal');
+    console.log(this.state.journal);
   }
   render() {
 
@@ -245,7 +245,7 @@ export default class User extends React.Component {
             daysArrayNum={this.state.daysArrayNum}
             userData={this.state.userData}
             selectedDay={selectedDay}
-            postFlag={this.state.postFlag}
+            postFlag={postFlag}
             updateFlag={updateFlag}
             year={year}
             month={month}

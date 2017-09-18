@@ -144,13 +144,26 @@ export default class Calendar extends Component {
       userData: this.props.userData,
       today: true,
       weekArrayVals: this.props.weekArrayVals,
+      journal: this.props.journal,
     }
 
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.postFlag) {
-      this.setState({journal: nextProps.userData[nextProps.userData.length-1].journal});
+    console.log(nextProps);
+    if(nextProps.postFlag) {
+      console.log('Cal CWRP postFlag true')
+      this.setState({
+        journal: nextProps.userData[nextProps.userData.length-1].journal,
+
+      });
+    }else {
+      console.log('Cal CWRP postFlag false')
+      console.log('journalprops');
+      console.log(this.props.journal);
+      this.setState({
+        journal: nextProps.journal
+      })
     }
   }
 
@@ -171,18 +184,32 @@ export default class Calendar extends Component {
             />
           </div>
           <div style = {style.weekdisplay}>
-            <WeekDisplay dates={this.state.weekArrayVals}/>
+            <WeekDisplay
+              dates={this.state.weekArrayVals}
+            />
           </div>
           <div style = {style.timer}>
-            <Timer id={this.state.id} today={this.state.today} time={this.props.time}/>
+            <Timer
+              id={this.state.id}
+              today={this.state.today}
+              time={this.props.time}
+            />
           </div>
           <div style = {style.journal}>
-            <Journal id={this.state.id} time={this.state.time} updateFlag={this.props.updateFlag} selectedDay={this.props.selectedDay} mediflectionUpdate={this.props.mediflectionUpdate} mediflectionSubmit={this.props.mediflectionSubmit} journal={this.props.journal} />
+            <Journal
+              id={this.state.id}
+              time={this.state.time}
+              updateFlag={this.props.updateFlag}
+              selectedDay={this.props.selectedDay}
+              mediflectionUpdate={this.props.mediflectionUpdate}
+              mediflectionSubmit={this.props.mediflectionSubmit}
+              journal={this.state.journal}
+            />
           </div>
 
         </div>
       </div>
-  );
+    );
   }
 
 }

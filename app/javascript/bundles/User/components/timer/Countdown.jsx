@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ShowRemaining from './ShowRemaining'
 
-class Countdown extends Component {
+export default class Countdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -127,4 +127,3 @@ class Countdown extends Component {
   }
 }
 
-export default Countdown;
