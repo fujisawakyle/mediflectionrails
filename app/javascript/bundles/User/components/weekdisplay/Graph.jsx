@@ -16,7 +16,7 @@ let daysArray = [];
 let today = new Date().getDay();
 const offset = 6 - today;
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-for (let i=0; i < offset; i++){
+for (let i=0; i < days.length; i++){
     days.unshift(days.pop());
 }
 
@@ -34,8 +34,9 @@ export default class Graph extends Component {
             datasets: [
                 {
                     label: 'minutes',
-                    data: this.props.dates,
+                    data: this.props.weekArrayVals,
                     backgroundColor: '#4A90E2',
+
                 }
             ]
         },
@@ -60,17 +61,32 @@ export default class Graph extends Component {
             }
         }
     };
+
   }
 
-
-
-
   render() {
-    const daysArray = this.props.dates;
+    let chartData = {
+            labels: [
+                days[0],days[1],days[2],days[3],days[4],days[5],days[6]
+            ],
+            datasets: [
+                {
+                    label: 'minutes',
+                    data: this.props.weekArrayVals,
+                    backgroundColor: '#4A90E2',
+                }
+            ]
+        };
+        console.log('state');
+    console.log(this.state.chartData.datasets[0].data);
+    console.log('chartData');
+    console.log(chartData);
+
     return (
         <div style={style.graph}>
 
             <Bar
+                redraw ={true}
                 data = {this.state.chartData}
                 options = {this.state.options}
                 width = {100}

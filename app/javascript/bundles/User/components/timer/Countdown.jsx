@@ -5,7 +5,7 @@ export default class Countdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: {},
+      timeLeft: {},
       seconds: props.seconds,
       logTime: props.logTime,
       showTime: false,
@@ -47,8 +47,8 @@ export default class Countdown extends Component {
   }
 
   componentDidMount() {
-    let timeLeftVar = this.secondsToTime(this.state.seconds);
-    this.setState({ time: timeLeftVar });
+    let timeLeftCalc = this.secondsToTime(this.state.seconds);
+    this.setState({ timeLeft: timeLeftCalc });
   }
 
   startTimer =(e) => {
@@ -78,7 +78,7 @@ export default class Countdown extends Component {
     let seconds = this.state.seconds - 1;
     let log = this.state.logTime - 1;
     this.setState({
-      time: this.secondsToTime(seconds),
+      timeLeft: this.secondsToTime(seconds),
       seconds: seconds,
       logTime: log,
     });
@@ -90,13 +90,25 @@ export default class Countdown extends Component {
 
     //log time every 1 minute
     if (log === 0) {
+      console.log(this.props.selectedDay);
 
       //API call - add 1 min to today's time.
       this.setState({
-        logTime: 60,
+        logTime: 5,
         timeTracked: this.state.timeTracked + 1
       })
-      alert(this.state.timeTracked);
+      if(this.state.journal == null) {
+        this.setState({
+          journal: ''
+        })
+      }
+      this.props.timeSubmit({
+        mediflection: {
+          date: this.props.selectedDay,
+          time: this.state.timeTracked,
+          journal: this.state.journal
+        }
+      });
     }
   }
 
@@ -117,9 +129,9 @@ export default class Countdown extends Component {
         {timerDisplay}
         {this.state.showTime &&
           <ShowRemaining
-            hours={this.state.time.h}
-            minutes={this.state.time.m}
-            seconds={this.state.time.s}
+            hours={this.state.timeLeft.h}
+            minutes={this.state.timeLeft.m}
+            seconds={this.state.timeLeft.s}
             logTime={this.state.logTime}
           />}
       </div>

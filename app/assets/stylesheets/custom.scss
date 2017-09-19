@@ -115,6 +115,32 @@ LAYOUT
   }
 }
 
+.c-welcome {
+  color: white;
+  &__container {
+    @include flex-box($dir: column, $jc: center, $ac: center);
+  }
+  &__title {
+    font-size:4rem;
+  }
+  &__subtitle {
+    color: white;
+    font-size: 2rem;
+  }
+  &__login {
+    @include flex-box($dir: column, $jc: center, $ac: center);
+    &--text {
+      font-size: 1.5rem;
+    }
+    &--icon-fb {
+
+      border-radius:3px;
+      width:8rem;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+  }
+}
+
 /*//////////////////////
 HEADER
 //////////////////////*/

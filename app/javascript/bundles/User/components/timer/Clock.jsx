@@ -9,6 +9,7 @@ const style = {
         fontSize: '1.5em',
         color: '#4A90E2',
         textAlign: 'right',
+        background: 'rgba(255,255,255,0.5)',
     }
 }
 
@@ -69,7 +70,16 @@ class Clock extends Component {
         return (
             <div>
                 {timeInput}
-                <Countdown today={this.props.today} time={this.props.time} callback={this.toggleInputShow} seconds={this.state.seconds} logTime={60} />
+                <Countdown
+                    timeSubmit={this.props.timeSubmit}
+                    today={this.props.today}
+                    time={this.props.time}
+                    callback={this.toggleInputShow}
+                    seconds={this.state.seconds}
+                    logTime={1}
+                    journal={this.props.journal}
+                    selectedDay={this.props.selectedDay}
+                />
 
             </div>
         )

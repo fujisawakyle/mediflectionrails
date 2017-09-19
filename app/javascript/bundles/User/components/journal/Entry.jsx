@@ -12,6 +12,7 @@ const style = {
         width: '20em',
         textAlign: 'top',
         color: '#4A90E2',
+        background: 'rgba(255,255,255,0.3)',
     }
 }
 
@@ -25,12 +26,6 @@ export default class Entry extends Component {
 
     }
     componentWillReceiveProps(nextProps) {
-        // console.log('Entry CWRP nextProps');
-        // console.log(nextProps);
-        // console.log('Entry CWRP this.props.entry');
-        // console.log(this.props.journal);
-        // console.log('Entry CWRP this.state.entry');
-        // console.log(this.state.journal);
         if (nextProps.journal !== this.props.journal) {
             this.setState({
                 journal: nextProps.journal,
@@ -38,11 +33,6 @@ export default class Entry extends Component {
         }
     }
     resetState = () => {
-        // console.log('inside resetState');
-        // console.log('this.state.journal');
-        // console.log(this.state.journal);
-        // console.log('this.props.journal');
-        // console.log(this.props.journal);
         this.setState({journal: this.state.journal})
     }
     handleChange = (event) => {
@@ -56,17 +46,23 @@ export default class Entry extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         if(this.props.updateFlag) {
-            console.log('this needs to be an update');
-            this.props.mediflectionUpdate({mediflection: {id: this.props.id, date: this.props.selectedDay, time: this.props.duration, journal: this.state.journal}});
-            console.log('after this');
+            this.props.mediflectionUpdate({
+                mediflection: {
+                    id: this.props.id,
+                    date: this.props.selectedDay,
+                    time: this.props.duration,
+                    journal: this.state.journal
+                }
+            });
         }
         else {
-            this.props.mediflectionSubmit({mediflection: {date: this.props.selectedDay, time: this.props.time, journal: this.state.journal}});
-            // console.log('before reset');
-            // console.log(this.state.journal);
-            //this.resetState();
-            // console.log('after reset');
-            // console.log(this.state.journal);
+            this.props.mediflectionSubmit({
+                mediflection: {
+                    date: this.props.selectedDay,
+                    time: this.props.time,
+                    journal: this.state.journal
+                }
+            });
         }
     }
     render() {
