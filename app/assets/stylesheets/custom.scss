@@ -85,7 +85,8 @@ LAYOUT
   }
 
   &__container {
-    height:75em;
+    @include flex-box($jc: center, $ai: center);
+    padding: 1em;
     max-width: 80em;
     border:none;
     background: rgba(255,255,255,0.2);
@@ -100,16 +101,120 @@ LAYOUT
     margin: 1em;
     padding: 2em;
   }
+}
+
+.c-site {
   &__components {
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    max-height: 60em;
-    max-width: 80em;
-    &--calendar {
+    width:100%;
+    @include flex-box($dir: column, $jc: center, $ai: center);
+
+    @include breakpoint(md) {
+      width:47em;
+      @include flex-box($dir: row, $jc: space-around, $ai: center);
+    }
+    @include breakpoint(lg) {
+      width:63em;
+    }
+  }
+  &__component {
+    @include flex-box($jc: center, $ai: center);
+    background: rgba(255,255,255,0.2);
+    text-align: center;
+    // padding-bottom: 10px;
+    width: 22em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 0.75em 0;
+    color: white;
+    @include breakpoint(sm) {
+      width:30em;
+    }
+    &--month {
+      padding:1em 0 2em 0;
+      @include breakpoint(md) {
+        width:22em;
+      }
       @include breakpoint(lg) {
-        width:28em;
         height:25em;
+        width: 30em;
+      }
+    }
+    &--week {
+
+      @include breakpoint(sm) {
+        height:15em;
+      }
+      @include breakpoint(md) {
+        width:22em;
+        height:15.65em;
+      }
+      @include breakpoint(lg) {
+        height:18em;
+        width: 30em;
+      }
+    }
+    &--timer {
+      padding-bottom: 1em;
+      @include breakpoint(md) {
+        width:22em;
+      }
+      @include breakpoint(sm) {
+        height:13em;
+      }
+      @include breakpoint(lg) {
+        height:16em;
+        width: 30em;
+      }
+    }
+    &--journal {
+      padding-bottom:1em;
+      @include breakpoint(md) {
+        width:22em;
+      }
+      @include breakpoint(sm) {
+        height:25em;
+      }
+      @include breakpoint(lg) {
+        height:27em;
+        width: 30em;
+      }
+    }
+  }
+  &__components-container {
+    @include flex-box($dir: column, $jc: center, $ai: center);
+  }
+}
+
+.component {
+  &__field {
+    color: #4A90E2;
+    background: rgba(255,255,255,0.5);
+    &--timer {
+      width: 2.75em;
+      font-size: 1.5em;
+      text-align: right;
+      @include breakpoint(sm) {
+        width:3em;
+        font-size:1.75em;
+      }
+      @include breakpoint(lg) {
+        width:2.6em;
+        font-size:3em;
+      }
+    }
+    &--entry {
+      height : 17em;
+      width: 20em;
+      text-align: top;
+      margin-bottom:0.5em;
+      @include breakpoint(sm) {
+        width:27.5em;
+      }
+      @include breakpoint(md) {
+        width:20em;
+      }
+      @include breakpoint(lg) {
+        width: 27.1em;
+        height: 20em;
       }
     }
   }
@@ -192,6 +297,9 @@ html {
 body {
   padding-top: 60px;
   background: linear-gradient(to left top, #20a5e8, green) fixed;
+  height:100vh;
+  @include flex-box($jc: center, $ai: center);
+
   // background: url('northern-lights.svg') no-repeat center center fixed;
   // -webkit-background-size: cover;
   // -moz-background-size: cover;
@@ -365,15 +473,21 @@ input {
 
 .DayPicker {
   display: inline-block;
-  background: rgba(255,255,255,.2);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  padding: 1em;
-  width: 22em;
-  height: 22em;
-  @include breakpoint(lg) {
-    width:28em;
-    height:25em;
-  };
+  // padding: 1em;
+  // width: 22em;
+  // height: 22em;
+  // @include breakpoint(sm) {
+  //   width:29em;
+  //   height:25em;
+  // }
+  // @include breakpoint(md) {
+  //   width: 22em;
+  //   height: 22em;
+  // }
+  // @include breakpoint(lg) {
+  //   width:28em;
+  //   height:25em;
+  // };
 }
 
 .DayPicker-wrapper {
@@ -453,7 +567,13 @@ input {
   abbr {
     cursor:default;
   }
-  @include breakpoint (lg) {
+  @include breakpoint (sm) {
+    padding:2rem;
+  }
+  @include breakpoint(md) {
+    padding: .5rem;
+  }
+  @include breakpoint(lg) {
     padding:2rem;
   }
 }
@@ -505,7 +625,10 @@ input {
   color: white;
   font-size: 0.875em;
   position:absolute;
-  left:28.5%;
+  left:28%;
+  @include breakpoint(sm) {
+    left:35%;
+  }
 }
 
 /* Default modifiers */

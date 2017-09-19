@@ -286,7 +286,7 @@ export default class User extends React.Component {
   this.updateData();
 
     return (
-      <div style = {style.user}>
+      <div>
           <Calendar
             chooseDay={this.chooseDay}
             timeSubmit={this.timeSubmit}

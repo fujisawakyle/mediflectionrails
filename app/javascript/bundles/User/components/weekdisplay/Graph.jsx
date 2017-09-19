@@ -8,7 +8,7 @@ import {Bar} from 'react-chartjs-2';
 
 const style = {
     graph : {
-
+        height: '12em'
     }
 }
 
@@ -73,8 +73,8 @@ export default class Graph extends Component {
                     redraw ={true}
                     data = {this.state.chartData}
                     options = {this.state.options}
-                    width = {100}
-                    height = {50} />
+                    width = {300}
+                    height = {150} />
             </div>
         )
     }
@@ -84,8 +84,8 @@ export default class Graph extends Component {
                 <Bar
                     data = {this.state.chartData}
                     options = {this.state.options}
-                    width = {100}
-                    height = {50} />
+                    width = {300}
+                    height = {150} />
             </div>
         )
     }

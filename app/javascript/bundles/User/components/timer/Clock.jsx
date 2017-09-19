@@ -3,14 +3,14 @@ import Countdown from './Countdown';
 
 const style = {
 
-    clockDisplay : {
-        width: '55px',
-        height: '30px',
-        fontSize: '1.5em',
-        color: '#4A90E2',
-        textAlign: 'right',
-        background: 'rgba(255,255,255,0.5)',
-    }
+    // clockDisplay : {
+    //     width: '55px',
+    //     height: '30px',
+    //     fontSize: '1.5em',
+    //     color: '#4A90E2',
+    //     textAlign: 'right',
+    //     background: 'rgba(255,255,255,0.5)',
+    // }
 }
 
 class Clock extends Component {
@@ -56,7 +56,7 @@ class Clock extends Component {
                 <div className='clockBox'>
                     <input
                         style={style.clockDisplay}
-                        className='clockDisplay'
+                        className='component__field component__field--timer'
                         type='number'
                         value={this.state.value}
                         onChange={this.handleChange}>

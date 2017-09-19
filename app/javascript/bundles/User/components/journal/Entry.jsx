@@ -7,13 +7,13 @@ import React, { Component } from 'react';
 blank input field, if filled, display that in the input field.*/
 
 const style = {
-    input : {
-        height : '17em',
-        width: '20em',
-        textAlign: 'top',
-        color: '#4A90E2',
-        background: 'rgba(255,255,255,0.3)',
-    }
+    // input : {
+        // height : '17em',
+        // width: '20em',
+        // textAlign: 'top',
+        // color: '#4A90E2',
+        // background: 'rgba(255,255,255,0.3)',
+    // }
 }
 
 export default class Entry extends Component {
@@ -73,7 +73,7 @@ export default class Entry extends Component {
                 autoComplete='off'
                 value={this.state.journal}
                 onChange={this.handleChange}
-                style={style.input}
+                className='component__field component__field--entry'
             />
             <button
                 className='button'
