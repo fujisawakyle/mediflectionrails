@@ -70,13 +70,30 @@ export default class Countdown extends Component {
     }
   }
 
+  continueTimer =(e) => {
+    this.setState({
+      startToggle: !this.state.startToggle,
+    })
+    e.preventDefault();
+    if (this.timer == 0) {
+      this.timer = setInterval(this.countDown, 1000);
+    }
+  }
+
+  pauseTimer = (e) => {
+    clearInterval(this.timer);
+    this.timer = 0;
+    this.setState({
+      startToggle: !this.state.startToggle,
+    })
+  }
+
   resetTimer = (e) => {
     this.props.callback();
     clearInterval(this.timer);
     this.timer = 0;
     this.setState({
       showTime: !this.state.showTime,
-      startToggle: !this.state.startToggle,
     })
   }
 
@@ -136,7 +153,7 @@ export default class Countdown extends Component {
     console.log(Number(this.props.time)>0);
     let timerDisplay;
     if (this.props.today) {
-      if (this.state.startToggle) {
+      if (this.state.startToggle && !this.state.showTime) {
         timerDisplay = <button className='button' onClick={this.startTimer}>Start</button>
         if(Number(this.props.time)>0) {
           timerDisplay = (
@@ -147,12 +164,29 @@ export default class Countdown extends Component {
             </div>
           )
         }
-      }
-      else {
-        timerDisplay = <button className='button' onClick={this.resetTimer}>Reset</button>
+      } else if(!this.state.startToggle && this.state.showTime) {
+        timerDisplay = <button className='button' onClick={this.pauseTimer}>Pause</button>
         if(Number(this.props.time)>0) {
           timerDisplay = (
             <div>
+              <button className='button' onClick={this.pauseTimer}>Pause</button>
+              <br/>
+              {this.props.time} minutes
+            </div>
+          )
+        }
+      }
+      else if(this.state.startToggle && this.state.showTime) {
+        timerDisplay = (
+          <div>
+          <button className='button' onClick={this.continueTimer}>Start</button>
+          <button className='button' onClick={this.resetTimer}>Reset</button>
+          </div>
+        )
+        if(Number(this.props.time)>0) {
+          timerDisplay = (
+            <div>
+              <button className='button' onClick={this.continueTimer}>Start</button>
               <button className='button' onClick={this.resetTimer}>Reset</button>
               <br/>
               {this.props.time} minutes
@@ -161,6 +195,7 @@ export default class Countdown extends Component {
         }
       }
     } else {
+
       timerDisplay = <div> {this.props.time} minutes</div>
     }
     return(
