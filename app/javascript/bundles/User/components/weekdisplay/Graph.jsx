@@ -79,7 +79,7 @@ export default class Graph extends Component {
         )
     }
     else {
-        chartdata = (
+        chartData = (
             <div style={style.graph}>
                 <Bar
                     data = {this.state.chartData}

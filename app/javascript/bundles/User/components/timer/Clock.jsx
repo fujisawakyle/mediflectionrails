@@ -72,11 +72,12 @@ class Clock extends Component {
                 {timeInput}
                 <Countdown
                     timeSubmit={this.props.timeSubmit}
+                    timeUpdate={this.props.timeUpdate}
                     today={this.props.today}
                     time={this.props.time}
                     callback={this.toggleInputShow}
                     seconds={this.state.seconds}
-                    logTime={1}
+                    logTime={3}
                     journal={this.props.journal}
                     selectedDay={this.props.selectedDay}
                 />

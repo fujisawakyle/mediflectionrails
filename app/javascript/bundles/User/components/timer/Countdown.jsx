@@ -11,7 +11,7 @@ export default class Countdown extends Component {
       showTime: false,
       startToggle: true,
       showInput: props.input,
-      timeTracked: 0
+      time: this.props.time
     };
 
     this.timer = 0;
@@ -44,6 +44,13 @@ export default class Countdown extends Component {
         logTime: nextProps.logTime
       })
     }
+    if (nextProps.time !== this.props.time) {
+      this.setState({
+        time: nextProps.time
+      })
+    }
+    console.log('nextProps.time', nextProps.time);
+    console.log('this.props.time', this.props.time);
   }
 
   componentDidMount() {
@@ -90,39 +97,71 @@ export default class Countdown extends Component {
 
     //log time every 1 minute
     if (log === 0) {
-      console.log(this.props.selectedDay);
 
       //API call - add 1 min to today's time.
       this.setState({
-        logTime: 5,
-        timeTracked: this.state.timeTracked + 1
+        logTime: 3,
+        time: this.state.time + 1
       })
       if(this.state.journal == null) {
         this.setState({
           journal: ''
         })
       }
-      this.props.timeSubmit({
-        mediflection: {
-          date: this.props.selectedDay,
-          time: this.state.timeTracked,
-          journal: this.state.journal
-        }
-      });
+      console.log('log === 0, this.state.time', this.state.time);
+      if(this.state.time > 1) {
+        console.log('call timeUpdate');
+        this.props.timeUpdate({
+          mediflection: {
+            date: this.props.selectedDay,
+            time: this.state.time,
+            journal: this.state.journal
+          }
+        });
+      } else {
+        this.props.timeSubmit({
+          mediflection: {
+            date: this.props.selectedDay,
+            time: this.state.time,
+            journal: this.state.journal
+          }
+        });
+      }
     }
   }
 
   render() {
+    console.log('in CD render props.time')
+    console.log(this.props.time);
+    console.log(Number(this.props.time)>0);
     let timerDisplay;
     if (this.props.today) {
       if (this.state.startToggle) {
         timerDisplay = <button className='button' onClick={this.startTimer}>Start</button>
+        if(Number(this.props.time)>0) {
+          timerDisplay = (
+            <div>
+              <button className='button' onClick={this.startTimer}>Start</button>
+              <br/>
+              {this.props.time} minutes
+            </div>
+          )
+        }
       }
       else {
         timerDisplay = <button className='button' onClick={this.resetTimer}>Reset</button>
+        if(Number(this.props.time)>0) {
+          timerDisplay = (
+            <div>
+              <button className='button' onClick={this.resetTimer}>Reset</button>
+              <br/>
+              {this.props.time} minutes
+            </div>
+          )
+        }
       }
     } else {
-      timerDisplay = <div> {this.props.time} </div>
+      timerDisplay = <div> {this.props.time} minutes</div>
     }
     return(
       <div>

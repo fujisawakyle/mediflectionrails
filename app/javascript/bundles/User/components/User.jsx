@@ -91,10 +91,14 @@ export default class User extends React.Component {
       daysArrayNum: daysArrayNum,
       daysArrayText: daysArrayText,
       weekArrayVals: weekArrayVals,
-      users: undefined,
       journal: '',
       today: true,
     };
+
+  }
+
+  componentDidMount() {
+    this.chooseDay(new Date(todayDate));
   }
 
   // create a new journal //
@@ -111,6 +115,7 @@ export default class User extends React.Component {
             this.setState({
               userData: userData,
             });
+
           }.bind(this),
 
           error: function(response, status, err) {
@@ -162,6 +167,10 @@ export default class User extends React.Component {
             this.setState({
               userData: userData,
             });
+            console.log('chooseDay begin')
+            this.chooseDay(new Date(todayDate));
+
+            console.log('chooseDay end')
           }.bind(this),
 
           error: function(response, status, err) {
@@ -176,7 +185,53 @@ export default class User extends React.Component {
         });
   }
 
+  timeUpdate = (mediflectionData) => {
+
+    $.ajax({
+          url: "/mediflections/" + mediflectionData.mediflection.id,
+          dataType: 'json',
+          type: 'PATCH',
+          data: mediflectionData,
+
+          success: function(userData) {
+            this.setState({userData: userData});
+            this.chooseDay(new Date(todayDate));
+          }.bind(this),
+
+          error: function(response, status, err) {
+            console.log('response');
+            console.log(response);
+            console.log('err');
+            console.log(err);
+            console.log("An error occured")
+          }
+
+
+        });
+  }
+
+  updateData = () => {
+    let data = this.state.userData;
+    console.log('chooseDay data',data);
+
+    for(let i of data) {
+      //add time to week array
+      let index = weekArrayDate.indexOf(i.date);
+      if(index >= 0){
+        weekArrayVals[index] = i.time;
+
+      }
+      if(daysArrayNum.indexOf(i.date) < 0) {
+        daysArrayNum.push(i.date);
+        daysArrayText.push(new Date(i.date));
+      }
+    }
+  }
+
   chooseDay = (day) => {
+    this.updateData
+
+    console.log('chooseDay daysArrayNum', daysArrayNum);
     postFlag = false;
 
     selectedDay = String(day).split(" ").slice(0, 4);
@@ -200,11 +255,11 @@ export default class User extends React.Component {
       today = false;
     }
 
-    if (this.state.daysArrayNum.indexOf(selectedDay) >= 0) {
+    if (daysArrayNum.indexOf(selectedDay) >= 0) {
       for(let data of this.state.userData) {
         if(selectedDay == data.date) {
           if(!data.time) {
-            data.time = 'no meditation recorded';
+            data.time = 0;
           }
           this.setState ({
             time: data.time,
@@ -220,7 +275,7 @@ export default class User extends React.Component {
     else {
       updateFlag = false;
       this.setState ({
-        time: 'no meditation recorded',
+        time: 0,
         journal: '',
       })
     }
@@ -228,25 +283,14 @@ export default class User extends React.Component {
   }
   render() {
 
-    const data = this.state.userData;
-
-    for(let i of data) {
-      //add time to week array
-      let index = weekArrayDate.indexOf(i.date);
-      if(index >= 0){
-        weekArrayVals[index] = i.time;
-      }
-      if(daysArrayNum.indexOf(i.date) < 0) {
-        daysArrayNum.push(i.date);
-        daysArrayText.push(new Date(i.date));
-      }
-    }
+  this.updateData();
 
     return (
       <div style = {style.user}>
           <Calendar
             chooseDay={this.chooseDay}
             timeSubmit={this.timeSubmit}
+            timeUpdate={this.timeUpdate}
             mediflectionUpdate={this.mediflectionUpdate}
             mediflectionSubmit={this.mediflectionSubmit}
             time={this.state.time}

@@ -22,6 +22,7 @@ class Timer extends Component {
                 <h3>Timer</h3>
                 <Clock
                     timeSubmit={this.props.timeSubmit}
+                    timeUpdate={this.props.timeUpdate}
                     today={this.props.today}
                     time={this.props.time}
                     selectedDay={this.props.selectedDay}

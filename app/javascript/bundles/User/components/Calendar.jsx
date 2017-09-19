@@ -123,6 +123,7 @@ export default class Calendar extends Component {
           <div style = {style.timer}>
             <Timer
               timeSubmit={this.props.timeSubmit}
+              timeUpdate={this.props.timeUpdate}
               id={this.state.id}
               today={this.props.today}
               time={this.props.time}
