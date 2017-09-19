@@ -27,7 +27,7 @@ const style = {
       margin: 'auto',
       boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
       padding: '1em',
-      margin: '1em',
+      margin: '1em 0',
       color: 'white',
     },
     weekdisplay : {
@@ -36,14 +36,14 @@ const style = {
       paddingBottom: '10px',
       width: '22em',
       boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-      margin: '1em',
+      margin: '1em 0',
       color: 'white',
     },
     calendar: {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      margin: '1em',
+      margin: '1em 0',
 
     },
     timer : {
@@ -51,7 +51,7 @@ const style = {
       height: '15em',
       width: '22em',
       textAlign: 'center',
-      margin: 'auto',
+      margin: '1em 0',
       boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
       margin: '1em',
     },
@@ -60,7 +60,7 @@ const style = {
       height: '25em',
       width: '22em',
       textAlign: 'center',
-      margin: 'auto',
+      margin: '1em 0',
       boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
       margin: '1em',
     },
@@ -117,6 +117,7 @@ export default class Calendar extends Component {
           <div style = {style.weekdisplay}>
             <WeekDisplay
               weekArrayVals={this.props.weekArrayVals}
+              today={this.props.today}
             />
           </div>
           <div style = {style.timer}>

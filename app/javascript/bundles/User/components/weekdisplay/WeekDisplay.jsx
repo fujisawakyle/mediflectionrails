@@ -21,7 +21,10 @@ export default class WeekDisplay extends Component {
     return (
         <div style={style.weekDisplay}>
             <h3> This week's meditation </h3>
-            <Graph weekArrayVals={this.props.weekArrayVals}/>
+            <Graph
+              weekArrayVals={this.props.weekArrayVals}
+              today={this.props.today}
+            />
         </div>
     )
   }
