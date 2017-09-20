@@ -68,6 +68,7 @@ export default class Countdown extends Component {
     if (this.timer == 0) {
       this.timer = setInterval(this.countDown, 1000);
     }
+    document.getElementsByClassName('c-site__component--timer')[0].classList.add('timer__window--open');
   }
 
   continueTimer =(e) => {
@@ -89,12 +90,14 @@ export default class Countdown extends Component {
   }
 
   resetTimer = (e) => {
+    document.getElementsByClassName('c-site__component--timer')[0].classList.remove('timer__window--open');
     this.props.callback();
     clearInterval(this.timer);
     this.timer = 0;
     this.setState({
       showTime: !this.state.showTime,
     })
+
   }
 
   countDown = () => {
@@ -160,7 +163,7 @@ export default class Countdown extends Component {
             <div>
               <button className='button' onClick={this.startTimer}>Start</button>
               <br/>
-              {this.props.time} minutes
+              <h5 className="timer__text"> {this.props.time} minutes </h5>
             </div>
           )
         }
@@ -170,8 +173,6 @@ export default class Countdown extends Component {
           timerDisplay = (
             <div>
               <button className='button' onClick={this.pauseTimer}>Pause</button>
-              <br/>
-              {this.props.time} minutes
             </div>
           )
         }
@@ -189,14 +190,14 @@ export default class Countdown extends Component {
               <button className='button' onClick={this.continueTimer}>Start</button>
               <button className='button' onClick={this.resetTimer}>Reset</button>
               <br/>
-              {this.props.time} minutes
+              <h5 className="timer__text"> {this.props.time} minutes </h5>
             </div>
           )
         }
       }
     } else {
 
-      timerDisplay = <div> {this.props.time} minutes</div>
+      timerDisplay = <div> <h5 className="timer__text"> {this.props.time} minutes </h5></div>
     }
     return(
       <div>
