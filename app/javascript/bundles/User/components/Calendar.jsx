@@ -28,7 +28,7 @@ const style = {
       justifyContent: 'center',
       alignContent: 'center',
       textAlign: 'center',
-      background: 'rgba(255,255,255,0.3)',
+      background: 'rgba(255,255,255,0.2)',
       boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
       height: '8.5em',
       width: '22em',
@@ -131,7 +131,7 @@ export default class Calendar extends Component {
             </div>
 
             <div className="c-site__components-container">
-              <div className="c-site__component c-site__component--timer" style = {style.timer}>
+              <div id="timer" className="c-site__component c-site__component--timer" style = {style.timer}>
                 <Timer
                   timeSubmit={this.props.timeSubmit}
                   timeUpdate={this.props.timeUpdate}

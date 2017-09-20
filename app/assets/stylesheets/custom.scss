@@ -104,7 +104,7 @@ LAYOUT
     @include flex-box($jc: center,  $ac: center);
     height: 7.5em;
     width:20em;
-    background: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.2);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 1em;
     padding: 2em;
@@ -172,7 +172,6 @@ LAYOUT
       @include breakpoint(lg) {
         height:16em;
         width: 30em;
-
       }
     }
     &--journal {
@@ -198,13 +197,14 @@ LAYOUT
   &__window {
     &--open {
       @include breakpoint(md) {
-        transition: width 1s, height 1s, transform 1s;
+        transition: width 1s, height 1s;
         width: 100%;
         height: 98%;
         position: absolute;
         top: 0;
         right: 0;
         background: #7cba9d;
+        background: #59b7a0;
       }
     }
   }
@@ -214,6 +214,16 @@ LAYOUT
   &__remaining {
     color: $pri-blu;
     font-size: 5em;
+  }
+  &__exit {
+    position:absolute;
+    top:0;
+    right:0;
+    margin: 1em 1em 0 0;
+    display:none;
+    &--active {
+      display:flex;
+    }
   }
 }
 
