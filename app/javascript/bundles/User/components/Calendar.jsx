@@ -3,7 +3,8 @@ import DayPicker from 'react-day-picker';
 import Timer from './timer/Timer';
 import Journal from './journal/Journal';
 import WeekDisplay from './weekdisplay/WeekDisplay';
-import User2 from './User2';
+import User from './User';
+import ShowDate from './ShowDate';
 
 const style = {
     container: {
@@ -108,7 +109,12 @@ export default class Calendar extends Component {
         <div style={style.container}>
           <div style= {style.userContainer}>
             <div style = {style.user}>
-              <User2 name={this.props.name} />
+              <User name={this.props.name} />
+            </div>
+          </div>
+          <div >
+            <div >
+              <ShowDate today={this.props.today} todayDate={this.props.todayDate} selectedDay={this.props.selectedDay} />
             </div>
           </div>
           <div className="c-site__components">
