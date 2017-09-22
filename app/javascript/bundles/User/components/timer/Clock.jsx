@@ -81,7 +81,7 @@ class Clock extends Component {
                     time={this.props.time}
                     callback={this.toggleInputShow}
                     seconds={this.state.seconds}
-                    logTime={3}
+                    logTime={60}
                     journal={this.props.journal}
                     selectedDay={this.props.selectedDay}
                 />

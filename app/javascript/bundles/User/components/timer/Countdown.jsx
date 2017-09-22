@@ -59,6 +59,7 @@ export default class Countdown extends Component {
   }
 
   startTimer =(e) => {
+    console.log(e.target.value);
     this.props.callback();
     this.setState({
       showTime: !this.state.showTime,
@@ -129,7 +130,7 @@ export default class Countdown extends Component {
 
       //API call - add 1 min to today's time.
       this.setState({
-        logTime: 3,
+        logTime: 60,
         time: this.state.time + 1
       })
       if(this.state.journal == null) {
