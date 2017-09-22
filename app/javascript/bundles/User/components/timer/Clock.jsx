@@ -13,13 +13,16 @@ const style = {
     // }
 }
 
+let timeVal;
+
 class Clock extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             showInput: true,
-            seconds: 0
+            seconds: 0,
+            value: 0,
         };
         this.timer = 0;
 
@@ -29,6 +32,7 @@ class Clock extends Component {
 
     handleChange(event) {
         event.preventDefault();
+        timeVal = event.target.value;
         //set input lower bound to 0
         if (event.target.value < 0) {
             event.target.value = 0;
@@ -53,6 +57,7 @@ class Clock extends Component {
 
 
     render () {
+        console.log('in render timeVal', timeVal);
         let minutes = ' minutes';
         let timeInput;
         if (this.state.showInput && this.props.today) {
@@ -75,6 +80,7 @@ class Clock extends Component {
             <div>
                 {timeInput}
                 <Countdown
+                    timeInput={timeVal}
                     timeSubmit={this.props.timeSubmit}
                     timeUpdate={this.props.timeUpdate}
                     today={this.props.today}

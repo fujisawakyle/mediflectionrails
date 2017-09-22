@@ -59,17 +59,21 @@ export default class Countdown extends Component {
   }
 
   startTimer =(e) => {
-    console.log(e.target.value);
-    this.props.callback();
-    this.setState({
-      showTime: !this.state.showTime,
-      startToggle: !this.state.startToggle,
-    })
-    e.preventDefault();
-    if (this.timer == 0) {
-      this.timer = setInterval(this.countDown, 1000);
+    if (this.props.timeVal == undefined) {
+      console.log('error');
     }
-    document.getElementsByClassName('c-site__component--timer')[0].classList.add('timer__window--open');
+    else {
+      this.props.callback();
+      this.setState({
+        showTime: !this.state.showTime,
+        startToggle: !this.state.startToggle,
+      })
+      e.preventDefault();
+      if (this.timer == 0) {
+        this.timer = setInterval(this.countDown, 1000);
+      }
+      document.getElementsByClassName('c-site__component--timer')[0].classList.add('timer__window--open');
+    }
   }
 
   continueTimer =(e) => {
