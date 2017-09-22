@@ -29,6 +29,10 @@ class Clock extends Component {
 
     handleChange(event) {
         event.preventDefault();
+        //set input lower bound to 0
+        if (event.target.value < 0) {
+            event.target.value = 0;
+        }
         this.setState({
             seconds: event.target.value * 60
         });
