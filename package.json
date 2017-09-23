@@ -13,7 +13,8 @@
     "react-on-rails": "^9.0.0"
   },
   "scripts": {
-    "start": "foreman start -f Procfile.dev"
+    "start": "foreman start -f Procfile.dev",
+    "postinstall": "cd client && npm install"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.7.1"
