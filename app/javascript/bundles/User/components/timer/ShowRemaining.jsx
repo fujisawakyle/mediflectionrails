@@ -11,9 +11,17 @@ export default class ShowRemaining extends Component {
     }
 
     render () {
+        let seconds = this.props.seconds
+        if (seconds === 0) {
+            seconds = '00';
+        }
+        else if (seconds < 10) {
+            seconds = '0' + seconds
+        }
+
         let showRemaining;
             if (this.props.hours === 0) {
-                    showRemaining = `${this.props.minutes}:${this.props.seconds}`
+                    showRemaining = `${this.props.minutes}:${seconds}`
                 }
             else {
                     showRemaining = `${this.props.hours}:${this.props.minutes}:${this.props.seconds}`

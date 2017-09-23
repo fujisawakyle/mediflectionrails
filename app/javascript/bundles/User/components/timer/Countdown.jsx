@@ -6,7 +6,7 @@ export default class Countdown extends Component {
     super(props);
     this.state = {
       timeLeft: {},
-      seconds: props.seconds,
+      seconds: this.props.seconds,
       logTime: props.logTime,
       showTime: false,
       startToggle: true,
@@ -49,29 +49,27 @@ export default class Countdown extends Component {
         time: nextProps.time
       })
     }
-    console.log('nextProps.time', nextProps.time);
-    console.log('this.props.time', this.props.time);
-  }
-
-  componentDidMount() {
-    let timeLeftCalc = this.secondsToTime(this.state.seconds);
-    this.setState({ timeLeft: timeLeftCalc });
+    let timeLeftCalc = this.secondsToTime(nextProps.seconds);
+    this.setState({
+      timeLeft: timeLeftCalc
+    });
   }
 
   startTimer =(e) => {
+    e.preventDefault();
     if (this.props.timeVal == undefined) {
       console.log('error');
     }
     else {
+      if (this.timer == 0) {
+        this.timer = setInterval(this.countDown, 1000);
+      }
       this.props.toggleInputShow();
       this.setState({
         showTime: !this.state.showTime,
         startToggle: !this.state.startToggle,
       })
-      e.preventDefault();
-      if (this.timer == 0) {
-        this.timer = setInterval(this.countDown, 1000);
-      }
+
       document.getElementsByClassName('c-site__component--timer')[0].classList.add('timer__window--open');
     }
   }
