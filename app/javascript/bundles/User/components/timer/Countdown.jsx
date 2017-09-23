@@ -63,7 +63,7 @@ export default class Countdown extends Component {
       console.log('error');
     }
     else {
-      this.props.callback();
+      this.props.toggleInputShow();
       this.setState({
         showTime: !this.state.showTime,
         startToggle: !this.state.startToggle,
@@ -95,7 +95,7 @@ export default class Countdown extends Component {
   }
 
   resetTimer = (e) => {
-    this.props.callback();
+    this.props.toggleInputShow();
     clearInterval(this.timer);
     this.timer = 0;
     this.setState({
@@ -106,7 +106,7 @@ export default class Countdown extends Component {
   exitTimer = (e) => {
     document.getElementsByClassName('c-site__component--timer')[0].classList.remove('timer__window--open');
     document.getElementsByClassName('timer__exit')[0].classList.remove('timer__exit--active');
-    this.props.callback();
+    this.props.toggleInputShow();
     clearInterval(this.timer);
     this.timer = 0;
     this.setState({
@@ -132,7 +132,6 @@ export default class Countdown extends Component {
     //log time every 1 minute
     if (log === 0) {
 
-      //API call - add 1 min to today's time.
       this.setState({
         logTime: 60,
         time: this.state.time + 1
