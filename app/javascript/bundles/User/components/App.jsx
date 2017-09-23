@@ -103,7 +103,7 @@ export default class User extends React.Component {
 
   // create a new journal //
   mediflectionSubmit = (mediflectionData) => {
-    //console.log(mediflectionData);
+
     $.ajax({
           url: "/mediflections",
           dataType: 'json',
@@ -167,10 +167,10 @@ export default class User extends React.Component {
             this.setState({
               userData: userData,
             });
-            console.log('chooseDay begin')
+
             this.chooseDay(new Date(todayDate));
 
-            console.log('chooseDay end')
+
           }.bind(this),
 
           error: function(response, status, err) {
@@ -212,7 +212,6 @@ export default class User extends React.Component {
 
   updateData = () => {
     let data = this.state.userData;
-    console.log('chooseDay data',data);
 
     for(let i of data) {
       //add time to week array
@@ -230,8 +229,6 @@ export default class User extends React.Component {
 
   chooseDay = (day) => {
     this.updateData
-
-    console.log('chooseDay daysArrayNum', daysArrayNum);
     postFlag = false;
 
     selectedDay = String(day).split(" ").slice(0, 4);

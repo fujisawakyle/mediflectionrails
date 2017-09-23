@@ -125,6 +125,7 @@ export default class Countdown extends Component {
     // Check if we're at zero.
     if (seconds === 0) {
       clearInterval(this.timer);
+      this.props.timerDone();
     }
 
     //log time every 1 minute

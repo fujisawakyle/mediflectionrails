@@ -13,6 +13,8 @@ const style = {
     // }
 }
 
+let timerDoneFlag = false;
+
 export default class Clock extends Component {
     constructor(props) {
         super(props);
@@ -31,7 +33,7 @@ export default class Clock extends Component {
     handleChange(event) {
         event.preventDefault();
 
-        //set input lower bound to 0
+        //set input lower bound to 1
         if (event.target.value < 1) {
             event.target.value = 1;
         }
@@ -40,6 +42,13 @@ export default class Clock extends Component {
             seconds: event.target.value * 60
         });
 
+    }
+
+    timerDone = () => {
+        //when timer is over, reset seconds to 0, not the input value
+        this.setState({
+            seconds: 0
+        })
     }
 
     updater(dataToUpdate) {
@@ -84,6 +93,7 @@ export default class Clock extends Component {
                     today={this.props.today}
                     time={this.props.time}
                     toggleInputShow={this.toggleInputShow}
+                    timerDone={this.timerDone}
                     seconds={this.state.seconds}
                     logTime={60}
                     journal={this.props.journal}

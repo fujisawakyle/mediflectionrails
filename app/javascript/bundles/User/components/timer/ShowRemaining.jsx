@@ -20,12 +20,15 @@ export default class ShowRemaining extends Component {
         }
 
         let showRemaining;
-            if (this.props.hours === 0) {
+            if (this.props.hours === 0 && this.props.minutes === 0 && this.props.seconds === 0) {
+                            showRemaining = "session over"
+            }
+            else if (this.props.hours === 0) {
                     showRemaining = `${this.props.minutes}:${seconds}`
-                }
+            }
             else {
                     showRemaining = `${this.props.hours}:${this.props.minutes}:${this.props.seconds}`
-                }
+            }
         return (
             <div className="timer__remaining" style={style.showTime} >
                 {showRemaining} <br />

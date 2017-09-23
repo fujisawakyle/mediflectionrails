@@ -20,7 +20,6 @@ export default class ShowDate extends Component {
         let dataDisplay;
         let today = this.formatDate(this.props.todayDate);
         let selectedDay = this.formatDate(this.props.selectedDay)
-        console.log('today format', today);
         if(this.props.today) {
             dataDisplay = (
                 <div className="l-site__date l-site__date--today">
