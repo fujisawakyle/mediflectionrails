@@ -21,7 +21,7 @@ export default class Clock extends Component {
 
         this.state = {
             showInput: true,
-            seconds: 0,
+            seconds: 60,
             value: 1,
         };
         this.timer = 0;
@@ -41,6 +41,7 @@ export default class Clock extends Component {
             value: event.target.value,
             seconds: event.target.value * 60
         });
+        console.log('seconds state', this.state.seconds);
 
     }
 

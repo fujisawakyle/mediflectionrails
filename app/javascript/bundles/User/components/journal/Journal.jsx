@@ -29,7 +29,7 @@ export default class Journal extends Component {
     render() {
         return (
         <div style={style.journal}>
-            <h3>Journal</h3>
+            <h3>Reflection</h3>
             <Entry
                 id={this.props.id}
                 time={this.props.time}

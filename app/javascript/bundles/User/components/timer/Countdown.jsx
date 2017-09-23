@@ -62,7 +62,7 @@ export default class Countdown extends Component {
     }
     else {
       if (this.timer == 0) {
-        this.timer = setInterval(this.countDown, 1000);
+        this.timer = setInterval(this.countDown, 10);
       }
       this.props.toggleInputShow();
       this.setState({
@@ -92,14 +92,17 @@ export default class Countdown extends Component {
     })
   }
 
-  resetTimer = (e) => {
-    this.props.toggleInputShow();
-    clearInterval(this.timer);
-    this.timer = 0;
-    this.setState({
-      showTime: !this.state.showTime,
-    })
-  }
+  // resetTimer = (e) => {
+
+  //   this.props.toggleInputShow();
+  //   clearInterval(this.timer);
+  //   this.timer = 0;
+  //   this.setState({
+  //     showTime: !this.state.showTime,
+  //     seconds: this.props.seconds
+  //   })
+  // }
+  // <button className='button' onClick={this.resetTimer}>Reset</button>
 
   exitTimer = (e) => {
     document.getElementsByClassName('c-site__component--timer')[0].classList.remove('timer__window--open');
@@ -109,6 +112,7 @@ export default class Countdown extends Component {
     this.timer = 0;
     this.setState({
       showTime: !this.state.showTime,
+      seconds: this.props.seconds
     })
   }
 
@@ -196,6 +200,7 @@ export default class Countdown extends Component {
           <div>
             <button className='button' onClick={this.pauseTimer}>Pause</button>
             <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
+            <h5 className="timer__text"> {this.props.time} minutes </h5>
           </div>
         )
       }
@@ -203,7 +208,6 @@ export default class Countdown extends Component {
         timerDisplay = (
           <div>
           <button className='button' onClick={this.continueTimer}>Start</button>
-          <button className='button' onClick={this.resetTimer}>Reset</button>
           <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
           </div>
         )
@@ -211,7 +215,6 @@ export default class Countdown extends Component {
           timerDisplay = (
             <div>
               <button className='button' onClick={this.continueTimer}>Start</button>
-              <button className='button' onClick={this.resetTimer}>Reset</button>
               <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
               <br/>
               <h5 className="timer__text"> {this.props.time} minutes </h5>

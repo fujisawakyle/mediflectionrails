@@ -185,6 +185,7 @@ LAYOUT
       }
     }
     &--timer {
+      position:relative;
       padding-bottom: 1em;
       @include breakpoint(md) {
         width:22em;

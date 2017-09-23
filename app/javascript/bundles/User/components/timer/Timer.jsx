@@ -19,7 +19,7 @@ class Timer extends Component {
     render () {
         return (
             <div style={style.timer} className='timerBox'>
-                <h3>Timer</h3>
+                <h3>Meditation</h3>
                 <Clock
                     timeSubmit={this.props.timeSubmit}
                     timeUpdate={this.props.timeUpdate}
