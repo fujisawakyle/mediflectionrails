@@ -237,7 +237,11 @@ LAYOUT
   }
   &__remaining {
     color: $pri-blu;
-    font-size: 5em;
+    font-size: 3em;
+    margin-top: -0.3em;
+    @include breakpoint(md) {
+      font-size: 5em;
+    }
   }
   &__exit {
     position:absolute;

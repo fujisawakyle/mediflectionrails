@@ -228,7 +228,7 @@ export default class User extends React.Component {
   }
 
   chooseDay = (day) => {
-    this.updateData
+    this.updateData();
     postFlag = false;
 
     selectedDay = String(day).split(" ").slice(0, 4);

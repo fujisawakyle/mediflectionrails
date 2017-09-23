@@ -10,7 +10,7 @@ const style = {
 }
 
 
-class Timer extends Component {
+export default class Timer extends Component {
     constructor(props) {
         super(props);
 
@@ -32,5 +32,3 @@ class Timer extends Component {
         )
     }
 }
-
-export default Timer;

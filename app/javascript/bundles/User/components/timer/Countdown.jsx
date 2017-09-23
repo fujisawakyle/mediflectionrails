@@ -5,7 +5,7 @@ export default class Countdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeLeft: {},
+      timeLeft: this.secondsToTime(this.props.seconds),
       seconds: this.props.seconds,
       logTime: props.logTime,
       showTime: false,
@@ -39,9 +39,11 @@ export default class Countdown extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.seconds !== this.props.seconds) {
+      let timeLeftCalc = this.secondsToTime(nextProps.seconds);
       this.setState({
         seconds: nextProps.seconds,
-        logTime: nextProps.logTime
+        logTime: nextProps.logTime,
+        timeLeft: timeLeftCalc
       })
     }
     if (nextProps.time !== this.props.time) {
@@ -49,10 +51,6 @@ export default class Countdown extends Component {
         time: nextProps.time
       })
     }
-    let timeLeftCalc = this.secondsToTime(nextProps.seconds);
-    this.setState({
-      timeLeft: timeLeftCalc
-    });
   }
 
   startTimer =(e) => {
@@ -62,12 +60,13 @@ export default class Countdown extends Component {
     }
     else {
       if (this.timer == 0) {
-        this.timer = setInterval(this.countDown, 10);
+        this.timer = setInterval(this.countDown, 1000);
       }
       this.props.toggleInputShow();
       this.setState({
         showTime: !this.state.showTime,
         startToggle: !this.state.startToggle,
+        seconds: this.props.timeVal * 60
       })
 
       document.getElementsByClassName('c-site__component--timer')[0].classList.add('timer__window--open');
@@ -114,6 +113,7 @@ export default class Countdown extends Component {
       showTime: !this.state.showTime,
       seconds: this.props.seconds
     })
+    this.props.timerDoneReset();
   }
 
   countDown = () => {
@@ -144,9 +144,7 @@ export default class Countdown extends Component {
           journal: ''
         })
       }
-      console.log('log === 0, this.state.time', this.state.time);
       if(this.state.time > 1) {
-        console.log('call timeUpdate');
         this.props.timeUpdate({
           mediflection: {
             date: this.props.selectedDay,
@@ -172,63 +170,43 @@ export default class Countdown extends Component {
     if (this.props.today) {
       if (!$('#timer').hasClass('timer__window--open')) {
         timerDisplay = <button className='button' onClick={this.startTimer}>Start</button>
-        if(Number(this.props.time)>0) {
-          timerDisplay = (
-            <div>
-              <button className='button' onClick={this.startTimer}>Start</button>
-              <br/>
-              <h5 className="timer__text"> {this.props.time} minutes </h5>
-            </div>
-          )
-        }
       }
       else if (this.state.startToggle && !this.state.showTime) {
-        timerDisplay = <button className='button' onClick={this.startTimer}>Start</button>
-        if(Number(this.props.time)>0) {
+        timerDisplay = (
+          <div>
+            <button className='button' onClick={this.startTimer}>Start</button>
+            <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
+          </div>
+        )
+      }
+      else if(!this.state.startToggle && this.state.showTime) {
+        if(this.props.timerDoneFlag){
           timerDisplay = (
             <div>
-              <button className='button' onClick={this.startTimer}>Start</button>
               <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
-              <br/>
-              <h5 className="timer__text"> {this.props.time} minutes </h5>
             </div>
           )
         }
-      }
-      else if(!this.state.startToggle && this.state.showTime) {
-        timerDisplay = (
-          <div>
-            <button className='button' onClick={this.pauseTimer}>Pause</button>
-            <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
-            <h5 className="timer__text"> {this.props.time} minutes </h5>
-          </div>
-        )
+        else {
+          timerDisplay = (
+            <div>
+              <button className='button' onClick={this.pauseTimer}>Pause</button>
+              <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
+            </div>
+          )
+        }
       }
       else if(this.state.startToggle && this.state.showTime) {
         timerDisplay = (
           <div>
-          <button className='button' onClick={this.continueTimer}>Start</button>
-          <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
+            <button className='button' onClick={this.continueTimer}>Start</button>
+            <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
           </div>
         )
-        if(Number(this.props.time)>0) {
-          timerDisplay = (
-            <div>
-              <button className='button' onClick={this.continueTimer}>Start</button>
-              <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
-              <br/>
-              <h5 className="timer__text"> {this.props.time} minutes </h5>
-            </div>
-          )
-        }
       }
-    } else {
-
-      timerDisplay = <div> <h5 className="timer__text"> {this.props.time} minutes </h5></div>
     }
     return(
       <div>
-        {timerDisplay}
         {this.state.showTime &&
           <ShowRemaining
             hours={this.state.timeLeft.h}
@@ -236,6 +214,7 @@ export default class Countdown extends Component {
             seconds={this.state.timeLeft.s}
             logTime={this.state.logTime}
           />}
+          {timerDisplay}
       </div>
     );
   }

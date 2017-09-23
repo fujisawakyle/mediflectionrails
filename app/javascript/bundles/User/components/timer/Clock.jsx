@@ -22,51 +22,46 @@ export default class Clock extends Component {
         this.state = {
             showInput: true,
             seconds: 60,
-            value: 1,
+            value: 1
         };
         this.timer = 0;
 
-        this.handleChange = this.handleChange.bind(this);
-        this.toggleInputShow = this.toggleInputShow.bind(this);
     };
 
-    handleChange(event) {
+    handleChange = (event) => {
         event.preventDefault();
-
         //set input lower bound to 1
         if (event.target.value < 1) {
             event.target.value = 1;
         }
         this.setState({
             value: event.target.value,
-            seconds: event.target.value * 60
+            seconds: event.target.value * 60,
         });
-        console.log('seconds state', this.state.seconds);
-
+    }
+    timerDoneReset = () => {
+        timerDoneFlag = false;
     }
 
     timerDone = () => {
+        timerDoneFlag = true;
         //when timer is over, reset seconds to 0, not the input value
         this.setState({
             seconds: 0
         })
     }
 
-    updater(dataToUpdate) {
-        this.setState({
-            seconds: dataToUpdate
-        })
-    }
-
-    toggleInputShow() {
+    toggleInputShow = () => {
         this.setState({
             showInput: !this.state.showInput
         })
     }
 
-
     render () {
-        let minutes = ' minutes';
+        let minutes = ' minute';
+        if (this.state.value > 1) {
+            minutes = ' minutes';
+        }
         let timeInput;
         if (this.state.showInput && this.props.today) {
             timeInput = (
@@ -86,6 +81,7 @@ export default class Clock extends Component {
         }
         return (
             <div>
+                <h5 className="timer__text"> {this.props.time} minutes </h5>
                 {timeInput}
                 <Countdown
                     timeVal={this.state.value}
@@ -95,12 +91,13 @@ export default class Clock extends Component {
                     time={this.props.time}
                     toggleInputShow={this.toggleInputShow}
                     timerDone={this.timerDone}
+                    timerDoneReset={this.timerDoneReset}
+                    timerDoneFlag={timerDoneFlag}
                     seconds={this.state.seconds}
                     logTime={60}
                     journal={this.props.journal}
                     selectedDay={this.props.selectedDay}
                 />
-
             </div>
         )
     }

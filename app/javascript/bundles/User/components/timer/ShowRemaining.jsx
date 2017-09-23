@@ -25,13 +25,14 @@ export default class ShowRemaining extends Component {
             }
             else if (this.props.hours === 0) {
                     showRemaining = `${this.props.minutes}:${seconds}`
+
             }
             else {
                     showRemaining = `${this.props.hours}:${this.props.minutes}:${this.props.seconds}`
             }
         return (
             <div className="timer__remaining" style={style.showTime} >
-                {showRemaining} <br />
+                {showRemaining}
             </div>
         )
     }

@@ -135,7 +135,6 @@ export default class Calendar extends Component {
                 />
               </div>
             </div>
-
             <div className="c-site__components-container">
               <div id="timer" className="c-site__component c-site__component--timer" style = {style.timer}>
                 <Timer
