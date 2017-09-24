@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "foreman start -f Procfile.dev",
-    "postinstall": "cd client && npm install"
+    "postinstall": "cd mediflection && npm install"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.7.1"

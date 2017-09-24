@@ -110,7 +110,14 @@ LAYOUT
       max-width: 80em;
     }
     &--home {
-      margin-top:0;
+      padding: 1em;
+      width: 90%;
+      @include breakpoint(xs) {
+      max-width: 40em;
+
+      }
+
+
     }
   }
   &__user {

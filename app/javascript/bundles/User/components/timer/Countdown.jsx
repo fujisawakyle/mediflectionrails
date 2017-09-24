@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import ShowRemaining from './ShowRemaining'
+import ShowRemaining from './ShowRemaining';
+//import startSound from 'app/assets/sounds/sessionBell.mp3';
+// const startPlay = new Audio(startSound2);
 
 export default class Countdown extends Component {
   constructor(props) {
@@ -55,6 +57,7 @@ export default class Countdown extends Component {
 
   startTimer =(e) => {
     e.preventDefault();
+    // startPlay.play();
     if (this.props.timeVal == undefined) {
       console.log('error');
     }
