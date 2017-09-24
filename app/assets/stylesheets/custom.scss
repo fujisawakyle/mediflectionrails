@@ -89,22 +89,25 @@ LAYOUT
   }
 
   &__container {
+    position:absolute;
+    top:4em;
     @include flex-box($jc: center, $ai: center);
-    padding: 1em;
-    max-width: 80em;
-    margin-top:50em;
+    padding: 0em;
+    padding-top: 0.5em;
+    max-width: 22.5em;
+    margin-top:1em;
     margin-bottom:1em;
     border:none;
     background: rgba(255,255,255,0.2);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    @include breakpoint(xs) {
+      max-width: 25em;
+      padding: 1em;
+    }
+
     @include breakpoint(sm) {
-      margin-top:53.5em;
-    }
-    @include breakpoint(md) {
-      margin-top:11em;
-    }
-    @include breakpoint(lg) {
-      margin-top:16em;
+      max-width: 80em;
     }
     &--home {
       margin-top:0;
@@ -162,6 +165,30 @@ LAYOUT
     color: white;
     @include breakpoint(sm) {
       width:30em;
+    }
+    &--container {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    &--user {
+      color:white;
+      display: flex;
+      background: transparent;
+      justify-content: center;
+      align-content: center;
+      text-align: center;
+      background: rgba(255,255,255,0.2);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      height: 8.5em;
+      width: 22em;
+
+      padding: 0.3em;
+      @include breakpoint(xs) {
+        padding:1em;
+      }
     }
     &--month {
       padding:1em 0 2em 0;
@@ -372,9 +399,7 @@ html {
 }
 
 body {
-  padding-top: 60px;
   background: linear-gradient(to left top, #20a5e8, green) fixed;
-  height:100vh;
   @include flex-box($jc: center, $ai: center);
 
   // background: url('northern-lights.svg') no-repeat center center fixed;
@@ -637,14 +662,17 @@ input {
 
 .DayPicker-Weekday {
   display: table-cell;
-  padding: .5rem;
+  padding: .1rem;
   font-size: .875em;
   text-align: center;
   color: white;
   abbr {
     cursor:default;
   }
-  @include breakpoint (sm) {
+  @include breakpoint(xs) {
+    padding: .5rem;
+  }
+  @include breakpoint(sm) {
     padding:2rem;
   }
   @include breakpoint(md) {

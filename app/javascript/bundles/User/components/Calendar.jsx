@@ -106,11 +106,9 @@ export default class Calendar extends Component {
 
     return (
       <div>
-        <div style={style.container}>
-          <div style= {style.userContainer}>
-            <div style = {style.user}>
-              <User name={this.props.name} />
-            </div>
+        <div className="c-site__component--container">
+          <div className="c-site__component--user">
+            <User name={this.props.name} />
           </div>
           <div >
             <div >

@@ -2,7 +2,6 @@
 
   <%= link_to "MEDIFLECTION", root_path, class:"header__logo" %>
   <div class="header__nav">
-    <%= link_to "Portfolio", 'http://fujisawakyle.com', :target => "_blank", class:"nav__item" %>
     <% if current_user %>
     <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"nav__item" %>
     <% end %>
