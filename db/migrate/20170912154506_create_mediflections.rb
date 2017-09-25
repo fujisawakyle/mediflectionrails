@@ -1,7 +1,8 @@
 class CreateMediflections < ActiveRecord::Migration[5.1]
   def change
     create_table :mediflections do |t|
-      t.references :user, foreign_key: true
+      t.belongs_to :user, foreign_key: true
+      # t.references :user, foreign_key: true
       t.text :journal
       t.integer :time
       t.string :date
