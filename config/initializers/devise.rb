@@ -276,4 +276,6 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
   config.omniauth :facebook, ENV["FACEBOOK_ID"], ENV["FACEBOOK_SECRET"],
     callback_url: "https://mediflection.herokuapp.com/users/auth/facebook/callback"
+
+  config.secret_key = ENV['DEVISE_SECRET_KEY']
 end
