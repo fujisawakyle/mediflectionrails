@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Clock from './Clock';
 import Countdown from './Countdown';
 
+
 const style = {
     timer: {
         color: 'white',

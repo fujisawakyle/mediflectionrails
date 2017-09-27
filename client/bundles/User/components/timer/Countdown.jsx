@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ShowRemaining from './ShowRemaining';
 //import startSound from 'app/assets/sounds/sessionBell.mp3';
 // const startPlay = new Audio(startSound2);
+import Sound from 'react-sound';
 
 export default class Countdown extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ export default class Countdown extends Component {
       showTime: false,
       startToggle: true,
       showInput: props.input,
-      time: this.props.time
+      time: this.props.time,
+      playStatus: Sound.status.STOPPED
     };
 
     this.timer = 0;
@@ -57,6 +59,7 @@ export default class Countdown extends Component {
 
   startTimer =(e) => {
     e.preventDefault();
+
     // startPlay.play();
     if (this.props.timeVal == undefined) {
       console.log('error');
@@ -66,10 +69,12 @@ export default class Countdown extends Component {
         this.timer = setInterval(this.countDown, 1000);
       }
       this.props.toggleInputShow();
+      console.log('yo');
       this.setState({
         showTime: !this.state.showTime,
         startToggle: !this.state.startToggle,
-        seconds: this.props.timeVal * 60
+        seconds: this.props.timeVal * 60,
+        playStatus: Sound.status.PLAYING
       })
 
       document.getElementsByClassName('c-site__component--timer')[0].classList.add('timer__window--open');
@@ -117,6 +122,12 @@ export default class Countdown extends Component {
       seconds: this.props.seconds
     })
     this.props.timerDoneReset();
+  }
+
+  handleSongFinishedPlaying = () => {
+    this.setState({
+      playStatus:Sound.status.STOPPED
+    })
   }
 
   countDown = () => {
@@ -210,6 +221,14 @@ export default class Countdown extends Component {
     }
     return(
       <div>
+        <Sound
+              url="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"
+              playStatus={this.state.playStatus}
+              playFromPosition={0 /* in milliseconds */}
+              onLoading={this.handleSongLoading}
+              onPlaying={this.handleSongPlaying}
+              onFinishedPlaying={this.handleSongFinishedPlaying}
+            />
         {this.state.showTime &&
           <ShowRemaining
             hours={this.state.timeLeft.h}
