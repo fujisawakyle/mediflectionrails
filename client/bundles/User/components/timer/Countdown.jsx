@@ -59,8 +59,6 @@ export default class Countdown extends Component {
 
   startTimer =(e) => {
     e.preventDefault();
-
-    // startPlay.play();
     if (this.props.timeVal == undefined) {
       console.log('error');
     }
@@ -119,14 +117,15 @@ export default class Countdown extends Component {
     this.timer = 0;
     this.setState({
       showTime: !this.state.showTime,
-      seconds: this.props.seconds
+      seconds: this.props.seconds,
+      playStatus: Sound.status.STOPPED
     })
     this.props.timerDoneReset();
   }
 
   handleSongFinishedPlaying = () => {
     this.setState({
-      playStatus:Sound.status.STOPPED
+      playStatus: Sound.status.STOPPED
     })
   }
 
@@ -144,6 +143,9 @@ export default class Countdown extends Component {
     if (seconds === 0) {
       clearInterval(this.timer);
       this.props.timerDone();
+      this.setState({
+        playStatus: Sound.status.PLAYING
+      });
     }
 
     //log time every 1 minute
@@ -222,7 +224,7 @@ export default class Countdown extends Component {
     return(
       <div>
         <Sound
-              url="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"
+              url="sessionBell.mp3"
               playStatus={this.state.playStatus}
               playFromPosition={0 /* in milliseconds */}
               onLoading={this.handleSongLoading}

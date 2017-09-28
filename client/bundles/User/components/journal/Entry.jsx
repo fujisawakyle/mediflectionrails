@@ -73,7 +73,7 @@ export default class Entry extends Component {
                 autoComplete='off'
                 value={this.state.journal}
                 onChange={this.handleChange}
-                className='component__field component__field--entry'
+                className='component component__field component__field--entry'
             />
             <button
                 className='button'

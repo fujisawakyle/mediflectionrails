@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Bar} from 'react-chartjs-2';
+import { defaults } from 'react-chartjs-2'
 
+defaults.global.defaultFontFamily = "Bungee Hairline, cursive"
 //make API call to update data.
 //look for the keys that are the date and then retrieve
 //data for the week. if there's no stored date, the

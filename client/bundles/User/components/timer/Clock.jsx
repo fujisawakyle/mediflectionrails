@@ -58,9 +58,13 @@ export default class Clock extends Component {
     }
 
     render () {
-        let minutes = ' minute';
-        if (this.state.value > 1) {
-            minutes = ' minutes';
+        let minutesInput = ' minute';
+        if (this.state.value != 1) {
+            minutesInput = ' minutes';
+        }
+        let minutesTracked = ' minute';
+        if (this.props.time != 1) {
+            minutesTracked = ' minutes'
         }
         let timeInput;
         if (this.state.showInput && this.props.today) {
@@ -68,12 +72,12 @@ export default class Clock extends Component {
                 <div className='clockBox'>
                     <input
                         style={style.clockDisplay}
-                        className='component__field component__field--timer'
+                        className='component component__field component__field--timer'
                         type='number'
                         value={this.state.value}
                         onChange={this.handleChange}>
                     </input>
-                     {minutes}
+                     {minutesInput}
                 </div>)
         }
         else {
@@ -81,7 +85,7 @@ export default class Clock extends Component {
         }
         return (
             <div>
-                <h5 className="timer__text"> {this.props.time} minutes </h5>
+                <h5 className="timer__text"> {this.props.time} {minutesTracked} </h5>
                 {timeInput}
                 <Countdown
                     timeVal={this.state.value}

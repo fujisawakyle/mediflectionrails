@@ -1,10 +1,24 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/* mixins, variables, etc. */
+/*//////////////////////
+COLORS
+//////////////////////*/
 
+$white:             #ffffff;
+$black:             #000000;
 $gray-medium-light: #eaeaea;
-$pri-blu: #4A90E2;
+$pri-blu:           #4A90E2;
+$light-green:       #00ff39;
+$light-green2:      #2eab65;
+$light-green-date:  #2eab65;
+
+/*//////////////////////
+FONTS
+//////////////////////*/
+
+$pri-font:          'Bungee Hairline', cursive;
+
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -98,8 +112,6 @@ LAYOUT
     margin-top:1em;
     margin-bottom:1em;
     border:none;
-    background: rgba(255,255,255,0.2);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     @include breakpoint(xs) {
       max-width: 25em;
@@ -139,7 +151,7 @@ LAYOUT
     height: 5.5em;
     width:22em;
     &--today {
-      border: 3px dashed;
+      border: 3px solid $light-green-date;
     }
     &--other-day {
       border: 3px solid;
@@ -194,7 +206,7 @@ LAYOUT
 
       padding: 0.3em;
       @include breakpoint(xs) {
-        padding:1em;
+        padding:0.5em;
       }
     }
     &--month {
@@ -260,12 +272,12 @@ LAYOUT
       @include breakpoint(md) {
         transition: width 1s, height 1s;
         width: 100%;
-        height: 98%;
+        height: 100%;
         position: absolute;
         top: 0;
         right: 0;
-        background: #7cba9d;
-        background: #59b7a0;
+        background: $pri-blu;
+        background: linear-gradient(to left top, #040711, #1687c0) fixed;
       }
     }
   }
@@ -273,7 +285,7 @@ LAYOUT
 
   }
   &__remaining {
-    color: $pri-blu;
+    color: $white;
     font-size: 3em;
     margin-top: -0.3em;
     @include breakpoint(md) {
@@ -293,9 +305,9 @@ LAYOUT
 }
 
 .component {
+  color: $black;
   &__field {
-    color: $pri-blu;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.8);
     &--timer {
       width: 2.75em;
       font-size: 1.5em;
@@ -310,6 +322,7 @@ LAYOUT
       }
     }
     &--entry {
+      font-size: 1em;
       height : 17em;
       width: 20em;
       text-align: top;
@@ -321,8 +334,9 @@ LAYOUT
         width:20em;
       }
       @include breakpoint(lg) {
-        width: 27.1em;
-        height: 20em;
+        width: 100%;
+        height: 13em;
+        font-size: 1.5em;
       }
     }
   }
@@ -406,14 +420,9 @@ html {
 }
 
 body {
-  background: linear-gradient(to left top, #20a5e8, green) fixed;
+  background: linear-gradient(to left top, #1687c0, #040711) fixed;
   @include flex-box($jc: center, $ai: center);
-
-  // background: url('northern-lights.svg') no-repeat center center fixed;
-  // -webkit-background-size: cover;
-  // -moz-background-size: cover;
-  // -o-background-size: cover;
-  // background-size: cover;
+  font-family: $pri-font;
 }
 
 section {
@@ -578,6 +587,10 @@ input {
   @include box_sizing;
 }
 
+.alert {
+
+}
+
 /* REACT-DAY-PICKER */
 
 .DayPicker {
@@ -726,7 +739,7 @@ input {
 .DayPicker-Footer {
   display: table-caption;
   caption-side: bottom;
-  padding-top: .5rem;
+  padding-top: 1.5rem;
 }
 
 .DayPicker-TodayButton {
@@ -737,10 +750,17 @@ input {
   color: white;
   font-size: 0.875em;
   position:absolute;
-  left:28%;
+  left:22%;
   @include breakpoint(sm) {
-    left:35%;
+    left:31%;
   }
+  @include breakpoint(md) {
+    left:22%;
+  }
+  @include breakpoint(lg) {
+    left:31%;
+  }
+
 }
 
 /* Default modifiers */
@@ -781,14 +801,13 @@ input {
 }
 
 .DayPicker-Day--today {
-  color: #fff;
+  color: $light-green !important;
   font-weight: 500;
-  border:2px dotted white;
 }
 .DayPicker-Day--today:focus {
   color: #fff;
   font-weight: 500;
-  border:2px dotted white;
+  border:2px solid $light-green2;
 }
 
 /* DayPickerInput */

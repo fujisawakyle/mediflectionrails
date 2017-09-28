@@ -107,9 +107,6 @@ export default class Calendar extends Component {
     return (
       <div>
         <div className="c-site__component--container">
-          <div className="c-site__component--user">
-            <User name={this.props.name} />
-          </div>
           <div >
             <div >
               <ShowDate today={this.props.today} todayDate={this.props.todayDate} selectedDay={this.props.selectedDay} />
