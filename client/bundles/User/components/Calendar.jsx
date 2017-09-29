@@ -118,6 +118,7 @@ export default class Calendar extends Component {
               <div className="c-site__component c-site__component--month" style={style.calendar}>
                 <DayPicker
                   initialMonth={new Date(this.props.year, this.props.month - 1)}
+                  todayButton = "current month"
                   selectedDays={this.state.daysArrayText}
                   onDayClick={day => this.props.chooseDay(day)}
                 />
