@@ -37,7 +37,7 @@ export default class Graph extends Component {
                 {
                     label: 'minutes',
                     data: this.props.weekArrayVals,
-                    backgroundColor: '#4A90E2',
+                    backgroundColor: 'rgba(74, 144, 226, 0.68)',
 
                 }
             ]

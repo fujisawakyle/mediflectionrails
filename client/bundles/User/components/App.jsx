@@ -111,6 +111,10 @@ export default class User extends React.Component {
           data: mediflectionData,
 
           success: function(userData) {
+            $('.journalBox').append("<div class='saved submit'>Saved!</div>");
+            setTimeout(function(){
+              $('.saved').hide().fadeOut(1000);
+            }, 2000);
             postFlag = true;
             this.setState({
               userData: userData,
@@ -144,6 +148,10 @@ export default class User extends React.Component {
           data: mediflectionData,
 
           success: function(userData) {
+            $('.journalBox').append("<div class='update submit'>Updated!</div>");
+            setTimeout(function(){
+              $('.update').hide().fadeOut(1000);
+            }, 2000);
             this.setState({
               userData: userData,
               saveStatus: true,

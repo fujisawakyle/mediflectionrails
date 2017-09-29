@@ -67,7 +67,7 @@ export default class Entry extends Component {
     }
     render() {
         return (
-        <div>
+        <div className="journalBox">
             <textarea
                 placeholder="Today's meditation was:"
                 autoComplete='off'
@@ -76,7 +76,7 @@ export default class Entry extends Component {
                 className='component component__field component__field--entry'
             />
             <button
-                className='button'
+                className='button journal__button'
                 type='button'
                 onClick={this.handleSubmit}>
                     Save

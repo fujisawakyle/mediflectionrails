@@ -9,9 +9,13 @@ $white:             #ffffff;
 $black:             #000000;
 $gray-medium-light: #eaeaea;
 $pri-blu:           #4A90E2;
+$sec-color:         #34373C;
 $light-green:       #00ff39;
 $light-green2:      #2eab65;
 $light-green-date:  #2eab65;
+$yellow:            #adab17;
+
+$component-back:         rgba(255,255,255,0.1);
 
 /*//////////////////////
 FONTS
@@ -132,29 +136,29 @@ LAYOUT
 
     }
   }
-  &__user {
-    @include flex-box($jc: center,  $ac: center);
-    height: 7.5em;
-    width:20em;
-    background: rgba(255,255,255,0.2);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin: 1em;
-    padding: 2em;
-  }
+  // &__user {
+  //   @include flex-box($jc: center,  $ac: center);
+  //   height: 7.5em;
+  //   width:20em;
+  //   background: $comp-back;
+  //   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  //   margin: 1em;
+  //   padding: 2em;
+  // }
   &__date {
     @include flex-box($jc: center,  $ac: center);
     color: white;
-    background: rgba(255,255,255,0.2);
+    background: $component-back;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 1em;
     padding: 0.5em 1em 5em 1em;
     height: 5.5em;
     width:22em;
     &--today {
-      border: 3px solid $light-green-date;
+      border: 1.5px solid $light-green-date;
     }
     &--other-day {
-      border: 3px solid;
+      border: 1.5px solid;
     }
   }
 }
@@ -174,10 +178,9 @@ LAYOUT
     }
   }
   &__component {
-    @include flex-box($jc: center, $ai: center);
-    background: rgba(255,255,255,0.2);
+    @include flex-box($jc: center);
+    background: $component-back;
     text-align: center;
-    // padding-bottom: 10px;
     width: 22em;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 0.75em 0;
@@ -192,27 +195,28 @@ LAYOUT
       justify-content: center;
       align-items: center;
     }
-    &--user {
-      color:white;
-      display: flex;
-      background: transparent;
-      justify-content: center;
-      align-content: center;
-      text-align: center;
-      background: rgba(255,255,255,0.2);
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      height: 8.5em;
-      width: 22em;
+    // &--user {
+    //   color:white;
+    //   display: flex;
+    //   background: transparent;
+    //   justify-content: center;
+    //   align-content: center;
+    //   text-align: center;
+    //   background: rgba(255,255,255,0.2);
+    //   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    //   height: 8.5em;
+    //   width: 22em;
 
-      padding: 0.3em;
-      @include breakpoint(xs) {
-        padding:0.5em;
-      }
-    }
+    //   padding: 0.3em;
+    //   @include breakpoint(xs) {
+    //     padding:0.5em;
+    //   }
+    // }
     &--month {
-      padding:1em 0 2em 0;
+      padding:1em 0 0em 0;
       @include breakpoint(md) {
         width:22em;
+        height:22.5em;
       }
       @include breakpoint(lg) {
         height:25em;
@@ -236,6 +240,7 @@ LAYOUT
     &--timer {
       position:relative;
       padding-bottom: 1em;
+      align-items: center;
       @include breakpoint(md) {
         width:22em;
       }
@@ -248,6 +253,7 @@ LAYOUT
       }
     }
     &--journal {
+      position:relative;
       padding-bottom:1em;
       @include breakpoint(md) {
         width:22em;
@@ -270,13 +276,13 @@ LAYOUT
   &__window {
     &--open {
       @include breakpoint(md) {
+        z-index: 1;
         transition: width 1s, height 1s;
         width: 100%;
         height: 100%;
         position: absolute;
         top: 0;
         right: 0;
-        background: $pri-blu;
         background: linear-gradient(to left top, #040711, #1687c0) fixed;
       }
     }
@@ -301,6 +307,13 @@ LAYOUT
     &--active {
       display:flex;
     }
+  }
+}
+
+.journal {
+
+  &__button {
+    margin-bottom: 1em;
   }
 }
 
@@ -336,7 +349,7 @@ LAYOUT
       }
       @include breakpoint(lg) {
         width: 100%;
-        height: 13em;
+        height: 12.5em;
         font-size: 1.5em;
       }
     }
@@ -406,7 +419,7 @@ NAV
 //////////////////////*/
 
 .button {
-  border: 1px solid white;
+  border: none;
   background-color: $pri-blu;
   box-shadow: none;
   cursor: pointer;
@@ -588,8 +601,18 @@ input {
   @include box_sizing;
 }
 
-.alert {
+.notice {
+  position:absolute;
+  top: 5.6em;
+  padding: .2em;
+  color:white;
+}
 
+.submit {
+  position: absolute;
+  bottom:0;
+  left:50%;
+  transform: translate(-50%, -20%);
 }
 
 /* REACT-DAY-PICKER */
@@ -684,20 +707,19 @@ input {
 .DayPicker-Weekday {
   display: table-cell;
   padding: .1rem;
+  padding-top:1em;
   font-size: .875em;
   text-align: center;
   color: white;
   abbr {
     cursor:default;
   }
-  @include breakpoint(xs) {
-    padding: .5rem;
-  }
   @include breakpoint(sm) {
     padding:2rem;
   }
   @include breakpoint(md) {
-    padding: .5rem;
+    padding: .1rem;
+    padding-top:1em;
   }
   @include breakpoint(lg) {
     padding:2rem;
@@ -744,7 +766,7 @@ input {
 }
 
 .DayPicker-TodayButton {
-  border: 1px solid white;
+  border: none;
   background-color: $pri-blu;
   box-shadow: none;
   cursor: pointer;
@@ -792,7 +814,7 @@ input {
 
 .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
   color: #FFF;
-  background-color: $pri-blu;
+  background-color: rgba(74, 144, 226, 0.68);
 }
 
 .DayPicker-Day:focus {

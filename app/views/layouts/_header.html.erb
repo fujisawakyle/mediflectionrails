@@ -3,12 +3,21 @@
   <%= link_to "MEDIFLECTION", root_path, class:"header__logo" %>
   <div class="header__nav">
     <% if current_user %>
-    <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %>"><%= message %></div>
-    <% end %>
-    <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"nav__item" %>
+
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"nav__item" %>
     <% end %>
   </div>
 </header>
+<% if flash.present? %>
+  <% flash.each do |message_type, message| %>
+    <div class="notice alert-<%= message_type %>"><%= message %></div>
+  <% end %>
+<% end %>
 
-
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('.notice').hide().fadeOut(1000);
+  }, 2000);
+ })
+</script>

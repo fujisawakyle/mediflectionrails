@@ -11,8 +11,11 @@ class MediflectionsController < ApplicationController
 
     respond_to do |f|
       if @mediflection.save
+        f.html {
+          flash[:success] = "Saved!"
+          redirect_to :back
 
-        f.html {redirect_to :back, notice: "Mediflection was created!"}
+        }
 
         f.json { render json: current_user.mediflections.all }
       else
@@ -20,18 +23,15 @@ class MediflectionsController < ApplicationController
       end
 
     end
-
-    # @user = User.find(1)
-    # @post = User.find(1).mediflections.build(mediflection_params)
-    # @post.save
-    # redirect_to user_url(@user)
   end
 
   def update
     respond_to do |f|
       if current_user.mediflections.find_by_date(mediflection_params[:date]).update_attributes(mediflection_params)
-        flash.now[:notice] = "Updated!"
-        f.html { redirect_to root_path, notice: "Mediflection was updated!"}
+        f.html {
+          flash[:success] = "Updated!"
+          redirect_to root_path
+        }
         f.json { render json: current_user.mediflections.all }
       else
         f.html { render :index }
