@@ -151,6 +151,7 @@ export default class Calendar extends Component {
                   mediflectionUpdate={this.props.mediflectionUpdate}
                   mediflectionSubmit={this.props.mediflectionSubmit}
                   journal={this.state.journal}
+                  saveStatus={this.props.saveStatus}
                 />
               </div>
             </div>

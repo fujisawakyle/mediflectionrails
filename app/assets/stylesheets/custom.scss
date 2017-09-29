@@ -306,6 +306,7 @@ LAYOUT
 
 .component {
   color: $black;
+  font-weight: bold;
   &__field {
     background: rgba(255,255,255,0.8);
     &--timer {

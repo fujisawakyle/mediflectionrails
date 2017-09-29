@@ -37,7 +37,10 @@ export default class Journal extends Component {
                 updateFlag={this.props.updateFlag}
                 selectedDay={this.props.selectedDay}
                 mediflectionSubmit={this.props.mediflectionSubmit}
-                journal={this.props.journal}/>
+                journal={this.props.journal}
+                saveStatus={this.props.saveStatus}
+                />
+
         </div>
     )
   }

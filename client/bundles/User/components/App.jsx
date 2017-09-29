@@ -114,6 +114,7 @@ export default class User extends React.Component {
             postFlag = true;
             this.setState({
               userData: userData,
+              saveStatus: true,
             });
 
           }.bind(this),
@@ -124,6 +125,9 @@ export default class User extends React.Component {
             console.log('err');
             console.log(err);
             console.log("An error occured")
+            this.setState({
+              saveStatus: false,
+            })
           }
 
 
@@ -140,7 +144,10 @@ export default class User extends React.Component {
           data: mediflectionData,
 
           success: function(userData) {
-            this.setState({userData: userData});
+            this.setState({
+              userData: userData,
+              saveStatus: true,
+            });
           }.bind(this),
 
           error: function(response, status, err) {
@@ -149,6 +156,9 @@ export default class User extends React.Component {
             console.log('err');
             console.log(err);
             console.log("An error occured")
+            this.setState({
+              saveStatus: false,
+            })
           }
 
 
@@ -304,6 +314,7 @@ export default class User extends React.Component {
             updateFlag={updateFlag}
             year={year}
             month={month}
+            saveStatus={this.state.saveStatus}
           />
       </div>
     );

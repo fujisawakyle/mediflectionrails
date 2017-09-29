@@ -30,6 +30,7 @@ class MediflectionsController < ApplicationController
   def update
     respond_to do |f|
       if current_user.mediflections.find_by_date(mediflection_params[:date]).update_attributes(mediflection_params)
+        flash.now[:notice] = "Updated!"
         f.html { redirect_to root_path, notice: "Mediflection was updated!"}
         f.json { render json: current_user.mediflections.all }
       else
