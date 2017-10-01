@@ -62,6 +62,12 @@ export default class Countdown extends Component {
     if (this.props.timeVal == undefined) {
       console.log('error');
     }
+    else if (this.props.timeVal == 0) {
+      $('.timerBox').append('<div class="start">invalid!</div>');
+        setTimeout(function(){
+          $('.start').hide().fadeOut(1000);
+        }, 2000);
+    }
     else {
       if (this.timer == 0) {
         this.timer = setInterval(this.countDown, 1000);
@@ -185,12 +191,12 @@ export default class Countdown extends Component {
     let timerDisplay;
     if (this.props.today) {
       if (!$('#timer').hasClass('timer__window--open')) {
-        timerDisplay = <button className='button' onClick={this.startTimer}>Start</button>
+        timerDisplay = <button className='button startButton' onClick={this.startTimer}>Start</button>
       }
       else if (this.state.startToggle && !this.state.showTime) {
         timerDisplay = (
           <div>
-            <button className='button' onClick={this.startTimer}>Start</button>
+            <button className='button startButton' onClick={this.startTimer}>Start</button>
             <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
           </div>
         )
@@ -215,7 +221,7 @@ export default class Countdown extends Component {
       else if(this.state.startToggle && this.state.showTime) {
         timerDisplay = (
           <div>
-            <button className='button' onClick={this.continueTimer}>Start</button>
+            <button className='button startButton' onClick={this.continueTimer}>Start</button>
             <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
           </div>
         )

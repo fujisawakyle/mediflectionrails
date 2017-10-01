@@ -292,9 +292,6 @@ LAYOUT
       }
     }
   }
-  &__text {
-
-  }
   &__remaining {
     color: $white;
     font-size: 3em;
@@ -319,6 +316,18 @@ LAYOUT
 
   &__button {
     margin-bottom: 1em;
+  }
+}
+
+.start {
+  position: absolute;
+  top: 88%;
+  left: 50%;
+  transform: translate(-50%, 43%);
+  font-size: 0.7em;
+  @include breakpoint(xs) {
+    font-size: 1em;
+    transform: translatex(-50%);
   }
 }
 
