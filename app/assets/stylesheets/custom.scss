@@ -397,9 +397,12 @@ HEADER
 .header {
   &__logo {
     @include flex-box($ai: center);
-    font-size: 3rem;
+    font-size: 2.2rem;
     color: white;
     padding-left:0.7em;
+    @include breakpoint(xs) {
+      font-size: 3rem;
+    }
   }
   &__nav {
     @include flex-box($dir: row, $wrp:nowrap, $ai: center);
@@ -413,9 +416,12 @@ NAV
 
 .nav {
   &__item {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     color: white;
     padding-right:0.5em;
+    @include breakpoint(xs) {
+      font-size: 1.5rem;
+    }
   }
 }
 
