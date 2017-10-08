@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import ShowRemaining from './ShowRemaining';
-//import startSound from 'app/assets/sounds/sessionBell.mp3';
-// const startPlay = new Audio(startSound2);
 import Sound from 'react-sound';
 
 export default class Countdown extends Component {
@@ -19,10 +17,9 @@ export default class Countdown extends Component {
     };
 
     this.timer = 0;
-
   }
 
-  secondsToTime(secs){
+  secondsToTime(secs) {
     let hours = Math.floor(secs / (60 * 60));
 
     let divisor_for_minutes = secs % (60 * 60);
@@ -32,9 +29,9 @@ export default class Countdown extends Component {
     let seconds = Math.ceil(divisor_for_seconds);
 
     let obj = {
-      "h": hours,
-      "m": minutes,
-      "s": seconds
+      h: hours,
+      m: minutes,
+      s: seconds
     };
     return obj;
   }
@@ -48,29 +45,29 @@ export default class Countdown extends Component {
         seconds: nextProps.seconds,
         logTime: nextProps.logTime,
         timeLeft: timeLeftCalc
-      })
+      });
     }
     if (nextProps.time !== this.props.time) {
       this.setState({
         time: nextProps.time
-      })
+      });
     }
   }
 
-  startTimer =(e) => {
+  startTimer = e => {
     e.preventDefault();
     if (this.props.timeVal == undefined) {
       console.log('error');
-    }
-    else if (this.props.timeVal == 0) {
+    } else if (this.props.timeVal == 0) {
       $('.timerBox').append('<div class="start">invalid!</div>');
-        setTimeout(function(){
-          $('.start').hide().fadeOut(1000);
-        }, 2000);
-    }
-    else {
+      setTimeout(function() {
+        $('.start')
+          .hide()
+          .fadeOut(1000);
+      }, 2000);
+    } else {
       if (this.timer == 0) {
-        this.timer = setInterval(this.countDown, 1000);
+        this.timer = setInterval(this.countDown, 100);
       }
       this.props.toggleInputShow();
       console.log('yo');
@@ -79,29 +76,31 @@ export default class Countdown extends Component {
         startToggle: !this.state.startToggle,
         seconds: this.props.timeVal * 60,
         playStatus: Sound.status.PLAYING
-      })
+      });
 
-      document.getElementsByClassName('c-site__component--timer')[0].classList.add('timer__window--open');
+      document
+        .getElementsByClassName('c-site__component--timer')[0]
+        .classList.add('timer__window--open');
     }
-  }
+  };
 
-  continueTimer =(e) => {
+  continueTimer = e => {
     this.setState({
-      startToggle: !this.state.startToggle,
-    })
+      startToggle: !this.state.startToggle
+    });
     e.preventDefault();
     if (this.timer == 0) {
       this.timer = setInterval(this.countDown, 1000);
     }
-  }
+  };
 
-  pauseTimer = (e) => {
+  pauseTimer = e => {
     clearInterval(this.timer);
     this.timer = 0;
     this.setState({
-      startToggle: !this.state.startToggle,
-    })
-  }
+      startToggle: !this.state.startToggle
+    });
+  };
 
   // resetTimer = (e) => {
 
@@ -115,9 +114,13 @@ export default class Countdown extends Component {
   // }
   // <button className='button' onClick={this.resetTimer}>Reset</button>
 
-  exitTimer = (e) => {
-    document.getElementsByClassName('c-site__component--timer')[0].classList.remove('timer__window--open');
-    document.getElementsByClassName('timer__exit')[0].classList.remove('timer__exit--active');
+  exitTimer = e => {
+    document
+      .getElementsByClassName('c-site__component--timer')[0]
+      .classList.remove('timer__window--open');
+    document
+      .getElementsByClassName('timer__exit')[0]
+      .classList.remove('timer__exit--active');
     this.props.toggleInputShow();
     clearInterval(this.timer);
     this.timer = 0;
@@ -125,15 +128,15 @@ export default class Countdown extends Component {
       showTime: !this.state.showTime,
       seconds: this.props.seconds,
       playStatus: Sound.status.STOPPED
-    })
+    });
     this.props.timerDoneReset();
-  }
+  };
 
   handleSongFinishedPlaying = () => {
     this.setState({
       playStatus: Sound.status.STOPPED
-    })
-  }
+    });
+  };
 
   countDown = () => {
     // Remove one second, set state so a re-render happens.
@@ -142,7 +145,7 @@ export default class Countdown extends Component {
     this.setState({
       timeLeft: this.secondsToTime(seconds),
       seconds: seconds,
-      logTime: log,
+      logTime: log
     });
 
     // Check if we're at zero.
@@ -156,17 +159,16 @@ export default class Countdown extends Component {
 
     //log time every 1 minute
     if (log === 0) {
-
       this.setState({
         logTime: 60,
         time: this.state.time + 1
-      })
-      if(this.state.journal == null) {
+      });
+      if (this.state.journal == null) {
         this.setState({
           journal: ''
-        })
+        });
       }
-      if(this.state.time > 1) {
+      if (this.state.time > 1) {
         this.props.timeUpdate({
           mediflection: {
             date: this.props.selectedDay,
@@ -184,69 +186,94 @@ export default class Countdown extends Component {
         });
       }
     }
-  }
+  };
 
   render() {
-
     let timerDisplay;
     if (this.props.today) {
       if (!$('#timer').hasClass('timer__window--open')) {
-        timerDisplay = <button className='button startButton' onClick={this.startTimer}>Start</button>
-      }
-      else if (this.state.startToggle && !this.state.showTime) {
+        timerDisplay = (
+          <button className="button startButton" onClick={this.startTimer}>
+            Start
+          </button>
+        );
+      } else if (this.state.startToggle && !this.state.showTime) {
         timerDisplay = (
           <div>
-            <button className='button startButton' onClick={this.startTimer}>Start</button>
-            <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
+            <button className="button startButton" onClick={this.startTimer}>
+              Start
+            </button>
+            <button
+              className="button timer__exit timer__exit--active"
+              onClick={this.exitTimer}
+            >
+              X
+            </button>
           </div>
-        )
-      }
-      else if(!this.state.startToggle && this.state.showTime) {
-        if(this.props.timerDoneFlag){
+        );
+      } else if (!this.state.startToggle && this.state.showTime) {
+        if (this.props.timerDoneFlag) {
           timerDisplay = (
             <div>
-              <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
+              <button
+                className="button timer__exit timer__exit--active"
+                onClick={this.exitTimer}
+              >
+                X
+              </button>
             </div>
-          )
-        }
-        else {
+          );
+        } else {
           timerDisplay = (
             <div>
-              <button className='button' onClick={this.pauseTimer}>Pause</button>
-              <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
+              <button className="button" onClick={this.pauseTimer}>
+                Pause
+              </button>
+              <button
+                className="button timer__exit timer__exit--active"
+                onClick={this.exitTimer}
+              >
+                X
+              </button>
             </div>
-          )
+          );
         }
-      }
-      else if(this.state.startToggle && this.state.showTime) {
+      } else if (this.state.startToggle && this.state.showTime) {
         timerDisplay = (
           <div>
-            <button className='button startButton' onClick={this.continueTimer}>Start</button>
-            <button className='button timer__exit timer__exit--active' onClick={this.exitTimer}>X</button>
+            <button className="button startButton" onClick={this.continueTimer}>
+              Start
+            </button>
+            <button
+              className="button timer__exit timer__exit--active"
+              onClick={this.exitTimer}
+            >
+              X
+            </button>
           </div>
-        )
+        );
       }
     }
-    return(
+    return (
       <div>
         <Sound
-              url="sessionBell.mp3"
-              playStatus={this.state.playStatus}
-              playFromPosition={0 /* in milliseconds */}
-              onLoading={this.handleSongLoading}
-              onPlaying={this.handleSongPlaying}
-              onFinishedPlaying={this.handleSongFinishedPlaying}
-            />
-        {this.state.showTime &&
+          url="sessionBell.mp3"
+          playStatus={this.state.playStatus}
+          playFromPosition={0 /* in milliseconds */}
+          onLoading={this.handleSongLoading}
+          onPlaying={this.handleSongPlaying}
+          onFinishedPlaying={this.handleSongFinishedPlaying}
+        />
+        {this.state.showTime && (
           <ShowRemaining
             hours={this.state.timeLeft.h}
             minutes={this.state.timeLeft.m}
             seconds={this.state.timeLeft.s}
             logTime={this.state.logTime}
-          />}
-          {timerDisplay}
+          />
+        )}
+        {timerDisplay}
       </div>
     );
   }
 }
-

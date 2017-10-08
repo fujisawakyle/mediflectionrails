@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import Calendar from './Calendar';
+import React, { Component } from 'react';
+import DayPicker from 'react-day-picker';
 import Timer from './timer/Timer';
-import Journal from './journal/Journal';
+import Journal from './Journal';
+import WeekDisplay from './WeekDisplay';
+import ShowDate from './ShowDate';
+import Calendar from './Calendar';
+import moment from 'moment';
 
 const style = {
   user: {
@@ -142,7 +146,7 @@ export default class User extends React.Component {
     $.ajax({
       url: '/mediflections/' + mediflectionData.mediflection.id,
       dataType: 'json',
-      type: 'PATCH',
+      type: 'PUT',
       data: mediflectionData,
 
       success: function(userData) {
@@ -167,7 +171,7 @@ export default class User extends React.Component {
         this.setState({
           saveStatus: false
         });
-      }
+      }.bind(this)
     });
   };
 
@@ -193,7 +197,7 @@ export default class User extends React.Component {
         console.log('err');
         console.log(err);
         console.log('An error occured');
-      }
+      }.bind(this)
     });
   };
 
@@ -236,7 +240,12 @@ export default class User extends React.Component {
   };
 
   chooseDay = day => {
+    console.log('moment', moment(day));
+    console.log('moment', moment(day)._d);
+    console.log('Date.toISOString(day)', day.toISOString());
+    console.log('new Date(day)', new Date(day));
     console.log('day', day);
+    console.log('String(day)', String(day));
     this.updateData();
     postFlag = false;
 
@@ -244,10 +253,7 @@ export default class User extends React.Component {
       .split(' ')
       .slice(0, 4);
     selectedDay[1] = translateMonth(selectedDay[1]);
-    if (selectedDay[2][0] == '0') {
-      selectedDay[2] = selectedDay[2].substr(1);
-    }
-    console.log('selectedDay[2]', selectedDay[2]);
+
     selectedDay = `${selectedDay[3]},${selectedDay[1]},${selectedDay[2]}`;
     this.setState({
       dateSelected: true,
@@ -256,15 +262,9 @@ export default class User extends React.Component {
     console.log('selectedDay', selectedDay);
     console.log('todayDate', todayDate);
     if (selectedDay === todayDate) {
-      // this.setState ({
-      //   today: true,
-      // })
       today = true;
     } else {
       //hide the timer if another date is pressed.
-      // this.setState ({
-      //   today: false,
-      // })
       today = false;
     }
 
@@ -292,31 +292,72 @@ export default class User extends React.Component {
   };
   render() {
     this.updateData();
-
     return (
       <div>
-        <Calendar
-          chooseDay={this.chooseDay}
-          timeSubmit={this.timeSubmit}
-          timeUpdate={this.timeUpdate}
-          mediflectionUpdate={this.mediflectionUpdate}
-          mediflectionSubmit={this.mediflectionSubmit}
-          time={this.state.time}
-          today={today}
-          todayDate={todayDate}
-          journal={this.state.journal}
-          weekArrayVals={weekArrayVals}
-          name={this.props.name}
-          daysArrayText={this.state.daysArrayText}
-          daysArrayNum={this.state.daysArrayNum}
-          userData={this.state.userData}
-          selectedDay={selectedDay}
-          postFlag={postFlag}
-          updateFlag={updateFlag}
-          year={year}
-          month={month}
-          saveStatus={this.state.saveStatus}
-        />
+        <div className="c-site__component--container">
+          <div>
+            <div>
+              <ShowDate
+                today={today}
+                todayDate={todayDate}
+                selectedDay={selectedDay}
+              />
+            </div>
+          </div>
+          <div className="c-site__components">
+            <div className="c-site__components-container">
+              <div
+                className="c-site__component c-site__component--month"
+                style={style.calendar}
+              >
+                <DayPicker
+                  initialMonth={new Date(year, month - 1)}
+                  todayButton="current month"
+                  selectedDays={this.state.daysArrayText}
+                  onDayClick={day => this.chooseDay(String(day))}
+                />
+              </div>
+              <div
+                className="c-site__component c-site__component--week"
+                style={style.weekdisplay}
+              >
+                <WeekDisplay weekArrayVals={weekArrayVals} today={today} />
+              </div>
+            </div>
+            <div className="c-site__components-container">
+              <div
+                id="timer"
+                className="c-site__component c-site__component--timer"
+                style={style.timer}
+              >
+                <Timer
+                  timeSubmit={this.timeSubmit}
+                  timeUpdate={this.timeUpdate}
+                  id={this.state.id}
+                  today={today}
+                  time={this.state.time}
+                  journal={this.state.journal}
+                  selectedDay={selectedDay}
+                />
+              </div>
+              <div
+                className="c-site__component c-site__component--journal"
+                style={style.journal}
+              >
+                <Journal
+                  id={this.state.id}
+                  time={this.state.time}
+                  updateFlag={updateFlag}
+                  selectedDay={selectedDay}
+                  mediflectionUpdate={this.mediflectionUpdate}
+                  mediflectionSubmit={this.mediflectionSubmit}
+                  journal={this.state.journal}
+                  saveStatus={this.state.saveStatus}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

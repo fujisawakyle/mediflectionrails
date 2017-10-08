@@ -6,7 +6,7 @@ import Timer from '../bundles/User/components/timer/Timer';
 import Countdown from '../bundles/User/components/timer/Countdown';
 import ShowRemaining from '../bundles/User/components/timer/ShowRemaining';
 import Clock from '../bundles/User/components/timer/Clock';
-import Journal from '../bundles/User/components/journal/Journal';
+import Journal from '../bundles/User/components/Journal';
 import Entry from '../bundles/User/components/journal/Entry';
 import ShowDate from '../bundles/User/components/ShowDate';
 
